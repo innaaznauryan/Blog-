@@ -1,0 +1,245 @@
+{
+  "users": [
+    {
+      "id": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+      "username": "John",
+      "fullName": "John Smith",
+      "email": "john@mail.ru",
+      "password": "varazdat"
+    },
+    {
+      "id": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "fullName": "Michael Scott",
+      "username": "mScott",
+      "email": "mScott@mail.ru",
+      "password": "mscott"
+    }
+  ],
+  "active": {
+    "id": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+    "fullName": "Michael Scott",
+    "username": "mScott",
+    "email": "mScott@mail.ru",
+    "password": "mscott"
+  },
+  "posts": [
+    {
+      "id": "2",
+      "authorId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+      "title": "Post 2",
+      "author": "John Smith",
+      "date": "11 Oct 2023",
+      "summary": "harum non quasi et rationen dsgusa hdsuyfsd hgdsuag",
+      "content": "ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores. \n\nTailwind CSS is a popular utility-first CSS framework that provides a set of pre-defined classes for common styles such as margins, padding, colors, and more. While Tailwind aims to provide a simple and easy-to-use solution for styling websites and applications, sometimes we need to override the default styles or provide custom styles that are not included in the framework. In such cases, we can use !important, and selector strategies to apply our styles.\nNew line\n\n",
+      "comments": [
+        {
+          "id": "fd05fb0a-865b-46c4-abc4-707b1a5e2505",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 2:51 PM",
+          "content": "fgfdsgfd"
+        },
+        {
+          "id": "00c7dec4-7ea7-4247-a5cb-151af9262810",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 2:46 PM",
+          "content": "ssgsg"
+        },
+        {
+          "id": "239030cb-ea95-4be8-9742-e96a1d54fe96",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 2:45 PM",
+          "content": "qwrrwt"
+        },
+        {
+          "id": "ff18ec4f-db59-4acb-80a7-d802cde7c18a",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 2:45 PM",
+          "content": "retret"
+        },
+        {
+          "id": "ed4fb3cf-92c0-40fd-a198-90bd99377292",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 1:35 PM",
+          "content": "gdfsgsdg"
+        },
+        {
+          "id": "b0ee7a1c-6843-4d3e-8041-8a563275cee6",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 15, 2023, 4:10 PM",
+          "content": "wwsrehdt"
+        },
+        {
+          "id": "a0e9ad10-6b3f-4bbc-a2b5-8b94cc6aa638",
+          "authorId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+          "author": "John Smith",
+          "email": "john@mail.ru",
+          "date": "Nov 15, 2023, 12:54 PM",
+          "content": "I am John Smith"
+        }
+      ]
+    },
+    {
+      "id": "a4550b08-1815-41db-9ded-7d19b072b65d",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "Dgsdzgdz",
+      "author": "Michael Scott",
+      "date": "Nov 10, 2023",
+      "summary": "Gdsgsdzg gdsgsdzg gdsgsdzg CSS framework gdsgsdzg gdsgsdzg gdsgsdzg CSS framework",
+      "content": "Dsgsdgd\nTailwind CSS is a popular utility-first CSS framework that provides a set of pre-defined classes for common styles such as margins, padding, colors, and more. While Tailwind aims to provide a simple and easy-to-use solution for styling websites and applications, sometimes we need to override the default styles or provide custom styles that are not included in the framework. In such cases, we can use !important, and selector strategies to apply our styles.\n\nSyntax:\n\nUsing !important: To apply styles with !important, we can add the !important keyword after the value of a property in a class. For example, to make the text color of an element red and override any existing styles, we can use the following class:",
+      "comments": [
+        {
+          "id": "c3960c9d-494d-4cc6-a4c4-2e3314d053d9",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 17, 2023, 4:08 PM",
+          "content": "hellooooooo"
+        },
+        {
+          "id": "3b0e079e-acda-4b34-a200-6e6d572eabb7",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 17, 2023, 4:08 PM",
+          "content": "My name is Michael Scott, this is my comment"
+        },
+        {
+          "id": "3b434f32-8093-4205-8d00-fdc4d72dc179",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 17, 2023, 3:28 PM",
+          "content": "dusigs uergusdfg gregufdsg ugresgudsfg ur9peygfds g"
+        },
+        {
+          "id": "0132138a-97b5-410c-9d58-c4aff4476006",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 2:47 PM",
+          "content": "hey"
+        },
+        {
+          "id": "f72d8762-0704-4a21-a8da-6c789760ea08",
+          "authorId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+          "author": "John Smith",
+          "email": "john@mail.ru",
+          "date": "Nov 15, 2023, 12:54 PM",
+          "content": "I am John Smith"
+        }
+      ]
+    },
+    {
+      "id": "a342093d-9dad-40cb-8b1a-cddb81a49a82",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "New Post",
+      "author": "Michael Scott",
+      "date": "Nov 13, 2023",
+      "summary": "Short summary ",
+      "content": "Tailwind CSS is a popular utility-first CSS framework that provides a set of pre-defined classes for common styles such as margins, padding, colors, and more. While Tailwind aims to provide a simple and easy-to-use solution for styling websites and applications, sometimes we need to override the default styles or provide custom styles that are not included in the framework. In such cases, we can use !important, and selector strategies to apply our styles.\n\nSyntax:\n\nUsing !important: To apply styles with !important, we can add the !important keyword after the value of a property in a class. For example, to make the text color of an element red and override any existing styles, we can use the following class:",
+      "comments": [
+        {
+          "id": "9bd4cbe5-3d11-43ca-8827-e6b4874f9efd",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 17, 2023, 5:23 PM",
+          "content": "this is a very very long comment lorem ipsum dolor. the white fox. jumped over."
+        },
+        {
+          "id": "38aa0c9d-f20e-4195-a1cd-f447d49966bb",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 15, 2023, 5:28 PM",
+          "content": "hello"
+        },
+        {
+          "id": "0513f7de-98e1-4f00-9b2f-eeccfba36eb2",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 15, 2023, 5:28 PM",
+          "content": "dsfsdgfds"
+        },
+        {
+          "id": "f714e1d6-e297-42cb-a79e-07ac719e771e",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 15, 2023, 5:05 PM",
+          "content": "fgfdgdg"
+        },
+        {
+          "id": "a4f6d529-8370-4f48-b481-fe02ceb1eb4a",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 15, 2023, 4:55 PM",
+          "content": "aFsafdsf"
+        }
+      ]
+    },
+    {
+      "id": "b2351135-c344-4641-8971-91c89db3de04",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "New Title yuhu",
+      "author": "Michael Scott",
+      "date": "Nov 13, 2023",
+      "summary": "gdsgsdzg gdsgsdzg gdsgsdzg CSS framework",
+      "content": "Using Selector Strategies: Tailwind provides a powerful feature called selector strategies, which allows us to target specific elements or components using a combination of classes and selectors. We can use the @layer directive to define our own selector strategies. For example, to target all <a> tags that are direct children of a <nav> element, we can use the following selector strategy:",
+      "comments": [
+        {
+          "id": "a7427957-7912-4a3f-9b6c-601e7a5804e0",
+          "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "author": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 16, 2023, 1:06 PM",
+          "content": "dtcytfcug"
+        }
+      ]
+    },
+    {
+      "id": "aa97465f-78ad-4540-abd9-1e6fd98086ef",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "Dgdfxhgfdxh",
+      "author": "Michael Scott",
+      "date": "Nov 16, 2023, 11:08 AM",
+      "summary": "Fdhfdhg yrestrset",
+      "content": "Resytsy yreys yetye yet",
+      "comments": []
+    },
+    {
+      "id": "48cf5eb9-524a-490c-9ec0-b6c46086a255",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "Lorem ipsum dolor sit amet consectur",
+      "author": "Michael Scott",
+      "date": "Nov 17, 2023, 11:00 AM",
+      "summary": "Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet",
+      "content": "Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet\nlorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet\nlorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet",
+      "comments": []
+    },
+    {
+      "id": "737467ea-46d1-4ced-9003-939ff55c3b74",
+      "authorId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+      "title": "Sdguigr guregreu trurutr9ue trhgidshugu rihgureghf",
+      "author": "Michael Scott",
+      "date": "Nov 17, 2023, 11:19 AM",
+      "summary": "Sdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihguregh",
+      "content": "Sdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf sdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf\nsdguigr guregreu trurutr9ue trhgidshugu rihgureghf",
+      "comments": []
+    }
+  ]
+}

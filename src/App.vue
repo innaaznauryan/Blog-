@@ -1,30 +1,39 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="flex justify-center gap-4 fixed w-full bg-teal-500 text-teal-800 text-base sm:text-lg md:text-2xl">
+    <router-link
+        :to="{ name: 'home' }"
+        class="py-4 px-2 sm:px-4 hover:text-orange-500 font-medium duration-500">
+      Home
+    </router-link>
+    <router-link
+        :to="{ name: 'posts' }"
+        class="py-4 px-2 sm:px-4 hover:text-orange-500 font-medium duration-500">
+      Posts
+    </router-link>
+    <router-link
+        :to="{ name: 'signup' }"
+        class="py-4 px-2 sm:px-4 hover:text-orange-500 font-medium duration-500">
+      Sign Up
+    </router-link>
+    <a v-if="loggedIn"
+       @click="handleClick"
+       class="cursor-pointer py-4 px-2 sm:px-4 hover:text-orange-500 font-medium duration-500">
+      Sign Out
+    </a>
+    <router-link
+        v-else
+        :to="{ name: 'login' }"
+        class="py-4 px-2 sm:px-4 hover:text-orange-500 font-medium duration-500">
+      Sign In
+    </router-link>
   </nav>
   <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script setup>
+  import { loggedIn, logout } from "@/composable/useUsers"
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  const handleClick = async() => {
+    await logout()
   }
-}
-</style>
+</script>
