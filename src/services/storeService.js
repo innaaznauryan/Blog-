@@ -31,11 +31,11 @@ export default {
     LOGOUT() {
         return apiClient.put("/active/", {})
     },
-    CREATE_POST({id, authorId, title, author, date, summary, content, comments}) {
-        return apiClient.post("/posts", {id, authorId, title, author, date, summary, content, comments})
+    CREATE_POST({id, userId, title, user, date, summary, content, comments}) {
+        return apiClient.post("/posts", {id, userId, title, user, date, summary, content, comments})
     },
-    UPDATE_POST({id, authorId, title, author, date, summary, content, comments}) {
-        return apiClient.put("/posts/" + id, {id, authorId, title, author, date, summary, content, comments})
+    UPDATE_POST({id, userId, title, user, date, summary, content, comments}) {
+        return apiClient.put("/posts/" + id, {id, userId, title, user, date, summary, content, comments})
     },
     DELETE_POST(id) {
         return apiClient.delete("/posts/" + id)

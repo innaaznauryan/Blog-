@@ -1,5 +1,11 @@
 <template>
-  <textarea :id="id" :value="modelValue" rows="5" @input="handleInput" class="p-2 rounded-lg bg-teal-100 resize-none shadow-md"></textarea>
+  <textarea
+      :id="id"
+      :value="modelValue"
+      rows="8"
+      @input="handleInput"
+      class="p-2 rounded-lg resize-none shadow-md">
+  </textarea>
 </template>
 
 <script setup>

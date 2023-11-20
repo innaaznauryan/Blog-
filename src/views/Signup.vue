@@ -1,59 +1,55 @@
 <template>
-  <div class="pt-20 text-teal-800 font-sans text-center">
+  <div class="pt-20 m-auto text-teal-800 font-sans w-3/4 md:w-1/2 xl:w-1/4">
     <form
         @submit.prevent="handleSubmit"
-        class="flex flex-col gap-2 items-center mt-6">
-      <label for="fullName">Full Name:</label>
-      <input
-          type="text"
-          id="fullName"
+        class="flex flex-col gap-2 items-center">
+      <BaseLabel
+          :id="'fullName'"
+          :error="v$.fullName.$error"
+          :errorMessage="v$.fullName.$errors[0]?.$message">
+        Full Name:
+      </BaseLabel>
+      <BaseInput
+          :id="'fullName'"
           v-model="fullName"
-          @blur="v$.fullName.$touch()"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center">
-      <div class="h-6">
-        <p v-if="v$.fullName.$error" class="text-red-500">
-          {{ v$.fullName.$errors[0]?.$message }}
-        </p>
-      </div>
-      <label for="username">Username:</label>
-      <input
-          type="text"
-          id="username"
+          class="w-full"
+          :touch="v$.fullName.$touch"/>
+      <BaseLabel
+          :id="'username'"
+          :error="v$.username.$error"
+          :errorMessage="v$.username.$errors[0]?.$message">
+        Username:
+      </BaseLabel>
+      <BaseInput
+          :id="'username'"
           v-model="username"
-          @blur="v$.username.$touch()"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center">
-      <div class="h-6">
-        <p v-if="v$.username.$error" class="text-red-500">
-          {{ v$.username.$errors[0]?.$message }}
-        </p>
-      </div>
-      <label for="email">Email:</label>
-      <input
-          type="text"
-          id="email"
+          class="w-full"
+          :touch="v$.username.$touch"/>
+      <BaseLabel
+          :id="'email'"
+          :error="v$.email.$error"
+          :errorMessage="v$.email.$errors[0]?.$message">
+        Email:
+      </BaseLabel>
+      <BaseInput
+          :id="'email'"
           v-model="email"
-          @blur="v$.email.$touch()"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center">
-      <div class="h-6">
-        <p v-if="v$.email.$error" class="text-red-500">
-          {{ v$.email.$errors[0]?.$message }}
-        </p>
-      </div>
-      <label for="password">Password:</label>
-      <input
-          type="password"
-          id="password"
+          class="w-full"
+          :touch="v$.email.$touch"/>
+      <BaseLabel
+          :id="'password'"
+          :error="v$.password.$error"
+          :errorMessage="v$.password.$errors[0]?.$message">
+        Password:
+      </BaseLabel>
+      <BaseInput
+          :id="'password'"
           v-model="password"
-          @blur="v$.password.$touch()"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center">
-      <div class="h-6">
-        <p v-if="v$.password.$error" class="text-red-500">
-          {{ v$.password.$errors[0]?.$message }}
-        </p>
-      </div>
+          class="w-full"
+          :touch="v$.password.$touch"/>
       <BaseButton :customClass="{'bg-teal-500': true}">Sign Up</BaseButton>
     </form>
-    <p v-if="signupError" class="text-red-500">{{ signupError }}</p>
+    <p v-if="signupError" class="text-red-500 text-center">{{ signupError }}</p>
   </div>
 </template>
 
@@ -63,6 +59,8 @@ import useValidate from "@vuelidate/core"
 import { helpers, required, minLength, email as mail } from "@vuelidate/validators"
 import { signUp, getUsers, signupError } from "@/composable/useUsers"
 import BaseButton from "@/components/BaseButton.vue"
+import BaseInput from "@/components/BaseInput.vue"
+import BaseLabel from "@/components/BaseLabel.vue"
 
 const fullName = ref(null)
 const username = ref(null)
@@ -71,7 +69,13 @@ const password = ref(null)
 
 const rules = computed(() => {
   return {
-    fullName: { required, minLength: minLength(6) },
+    fullName: {
+      required,
+      fNameRequirement: helpers.withMessage(
+          () => "Full name must contain first name, last name and can't contain numbers",
+          (value) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(value)
+      )
+    },
     username: { required, minLength: minLength(6) },
     email: { required, mail },
     password: {
@@ -92,14 +96,12 @@ onMounted(async() => {
 })
 const handleSubmit = async(e) => {
   await v$.value.$validate()
-  if(v$.value.$error) {
-    e.target.reset()
-  } else {
+  if(!v$.value.$error) {
     await signUp(fullName, username, email, password)
     if(signupError) {
       setTimeout(() => {
         signupError.value = null
-      }, 2000)
+      }, 3000)
     }
   }
 }

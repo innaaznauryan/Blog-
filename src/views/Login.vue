@@ -1,39 +1,47 @@
 <template>
-  <div class="pt-20 text-teal-800 font-sans text-center">
+  <div class="pt-20 m-auto text-teal-800 font-sans w-3/4 md:w-1/2 xl:w-1/4">
     <form
         @submit.prevent="handleSubmit"
-        class="flex flex-col gap-3 items-center mt-6">
-      <label for="username">Username:</label>
-      <input
-          type="text"
-          id="username"
+        class="flex flex-col gap-2 items-center">
+      <BaseLabel
+          :id="'username'"
+          :error="v$.username.$error"
+          :errorMessage="v$.username.$errors[0]?.$message">
+        Username:
+      </BaseLabel>
+      <BaseInput
+          :id="'username'"
           v-model="username"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center placeholder-red-500"
-          :placeholder="passwordError">
-      <label for="password">Password:</label>
-      <input
-          type="password"
-          id="password"
+          class="w-full"
+          :touch="v$.username.$touch"/>
+      <BaseLabel
+          :id="'password'"
+          :error="v$.password.$error"
+          :errorMessage="v$.password.$errors[0]?.$message">
+        Password:
+      </BaseLabel>
+      <BaseInput
+          :id="'password'"
           v-model="password"
-          class="p-2 rounded-lg shadow-md w-2/3 sm:w-1/2 lg:w-1/4 bg-white text-center placeholder-red-500"
-          :placeholder="passwordError">
+          class="w-full"
+          :touch="v$.password.$touch"/>
       <BaseButton :customClass="{'bg-teal-500': true}">Sign In</BaseButton>
     </form>
-    <p v-if="loginError" class="text-red-500">{{ loginError }}</p>
+    <p v-if="loginError" class="text-red-500 text-center">{{ loginError }}</p>
   </div>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue"
+import { computed, onMounted, ref } from "vue"
 import { login, getUsers, loginError } from "@/composable/useUsers"
 import { required } from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import BaseButton from "@/components/BaseButton.vue"
+import BaseInput from "@/components/BaseInput.vue"
+import BaseLabel from "@/components/BaseLabel.vue"
 
 const username = ref(null)
 const password = ref(null)
-const usernameError = ref(null)
-const passwordError = ref(null)
 
 const rules = computed(() => {
   return {
@@ -43,23 +51,15 @@ const rules = computed(() => {
 })
 const v$ = useValidate(rules, {username, password})
 
-const handleSubmit = async(e) => {
+const handleSubmit = async() => {
   await v$.value.$validate()
-  if(v$.value.$error) {
-    usernameError.value = v$.value.username.$errors[0]?.$message
-    passwordError.value = v$.value.password.$errors[0]?.$message
-  } else {
+  if(!v$.value.$error) {
     await login(username, password)
     if(loginError) {
       setTimeout(() => {
         loginError.value = null
-      }, 2000)
-      e.target.reset()
-      usernameError.value = null
-      passwordError.value = null
+      }, 3000)
     }
-    username.value = null
-    password.value = null
   }
 }
 onMounted(async() => {

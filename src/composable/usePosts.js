@@ -31,13 +31,14 @@ async function createPost(title, summary, content) {
     try {
         const newPost = {
             id: uuidv4(),
-            authorId: loggedIn.value.id,
+            userId: loggedIn.value.id,
             title: format(title.value),
-            author: loggedIn.value.fullName,
+            user: loggedIn.value.fullName,
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
             summary: format(summary.value),
             content: format(content.value),
-            comments: []
+            comments: [],
+            likes: []
         }
         const response = await storeService.CREATE_POST(newPost)
         posts.value.push(response.data)
@@ -66,8 +67,8 @@ async function addComment(post, comment, loggedIn) {
     try {
         post.value.comments.unshift({
             id: uuidv4(),
-            authorId: loggedIn.value.id,
-            author: loggedIn.value.fullName,
+            userId: loggedIn.value.id,
+            user: loggedIn.value.fullName,
             email: loggedIn.value.email,
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
             content: comment.value.trim()
@@ -82,6 +83,13 @@ async function deleteComment(comment, post) {
         const comments = post.value.comments.filter(elem => elem.id !== comment)
         post.value = {...post.value, comments}
         await storeService.UPDATE_POST(post.value)
+    } catch(err) {
+        postError.value = err
+    }
+}
+async function addLike() {
+    try {
+
     } catch(err) {
         postError.value = err
     }

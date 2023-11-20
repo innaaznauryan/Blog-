@@ -17,7 +17,7 @@
           alt="background"
           class="inline-block my-4 p-4">
     </div>
-    <p class="text-lg">Share you thoughts, ideas, adventures in our blog!</p>
+    <p class="text-lg p-4">Share you thoughts, ideas, adventures in our blog!</p>
   </div>
 </template>
 
