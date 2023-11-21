@@ -87,12 +87,24 @@ async function deleteComment(comment, post) {
         postError.value = err
     }
 }
-async function addLike() {
+async function addLike(post, loggedIn) {
     try {
-
+        post.value.likes.push(loggedIn.value.id)
+        await storeService.UPDATE_POST(post.value)
     } catch(err) {
         postError.value = err
     }
+}
+async function deleteLike(post, loggedIn) {
+    try {
+        post.value = {...post.value, likes: post.value.likes.filter(id => id !== loggedIn.value.id)}
+        await storeService.UPDATE_POST(post.value)
+    } catch(err) {
+        postError.value = err
+    }
+}
+function isFav(post, loggedIn) {
+    return post.value.likes.includes(loggedIn.value.id)
 }
 function format(string) {
     return string.trim()[0].toUpperCase() + string.trim().slice(1)
@@ -112,5 +124,8 @@ export {
     editPost,
     deletePost,
     addComment,
-    deleteComment
+    deleteComment,
+    addLike,
+    deleteLike,
+    isFav
 }

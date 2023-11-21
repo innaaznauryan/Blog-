@@ -17,7 +17,6 @@ async function signUp(fullName, username, email, password) {
         } else {
             await storeService.SIGNUP(uuidv4(), fullName.value, username.value, email.value, password.value)
             await logout()
-            router.push({name: "home"})
         }
     } catch(err) {
         signupError.value = err
@@ -58,6 +57,7 @@ async function logout() {
     try {
         await storeService.LOGOUT()
         loggedIn.value = null
+        router.push({name: "home"})
     } catch(err) {
         console.log(err)
     }

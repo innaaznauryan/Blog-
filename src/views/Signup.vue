@@ -45,6 +45,7 @@
       <BaseInput
           :id="'password'"
           v-model="password"
+          :type="'password'"
           class="w-full"
           :touch="v$.password.$touch"/>
       <BaseButton :customClass="{'bg-teal-500': true}">Sign Up</BaseButton>

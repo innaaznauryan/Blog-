@@ -7,7 +7,7 @@
           <h2 class="p-2 font-medium text-xl">{{ singlePost.title }}</h2>
           <p class="p-2 font-medium">{{ singlePost.user }}</p>
           <p class="p-2 italic">{{ singlePost.date }}</p>
-          <div @click="handleLike" class="cursor-pointer m-2">
+          <div v-if="loggedIn" @click="handleLike" class="cursor-pointer m-2">
             <IconHeartFilled v-if="like"/>
             <IconHeart v-else/>
           </div>
@@ -60,7 +60,10 @@ import {
   showModal,
   showDeletePost,
   postError,
-  getPosts
+  getPosts,
+  addLike,
+  deleteLike,
+  isFav
 } from "@/composable/usePosts"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
 import { IconHeart, IconHeartFilled } from "@tabler/icons-vue"
@@ -76,7 +79,8 @@ const props = defineProps({
   id: String
 })
 
-const handleLike = () => {
+const handleLike = async() => {
+  like.value ? await deleteLike(singlePost, loggedIn) : await addLike(singlePost, loggedIn)
   like.value = !like.value
 }
 const handleEditPost = () => {
@@ -95,6 +99,9 @@ onMounted(async() => {
   await getSinglePost(props.id)
   await getPosts()
   await getLoggedIn()
+  if(loggedIn.value) {
+    like.value = isFav(singlePost, loggedIn)
+  }
 })
 </script>
 

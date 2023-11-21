@@ -16,11 +16,11 @@
     }
   ],
   "active": {
-    "id": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
-    "fullName": "John Smith",
-    "username": "Johnny",
-    "email": "john@mail.ru",
-    "password": "Varazdat1"
+    "id": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+    "fullName": "Michael Scott",
+    "username": "mScott",
+    "email": "mScott@mail.ru",
+    "password": "Mscott1"
   },
   "posts": [
     {
@@ -32,6 +32,14 @@
       "summary": "Harum non quasi et rationen dsgusa hdsuyfsd hgdsuag",
       "content": "Ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores ea ut dolorum nostrum id quia aut est nfuga est inventore vel eligendi explicabo quis consectetur naut occaecati repellat id natus quo est nut blanditiis quia ut vel ut maiores. \n\nTailwind CSS is a popular utility-first CSS framework that provides a set of pre-defined classes for common styles such as margins, padding, colors, and more. While Tailwind aims to provide a simple and easy-to-use solution for styling websites and applications, sometimes we need to override the default styles or provide custom styles that are not included in the framework. In such cases, we can use !important, and selector strategies to apply our styles.\nNew line",
       "comments": [
+        {
+          "id": "7dde3684-d54b-4676-9280-01afb2b77e5d",
+          "userId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "user": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 21, 2023, 5:58 PM",
+          "content": "This is my fav!"
+        },
         {
           "id": "a9792553-20f7-49d3-8657-f67ed6b12afd",
           "userId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
@@ -96,6 +104,9 @@
           "date": "Nov 15, 2023, 12:54 PM",
           "content": "I am John Smith"
         }
+      ],
+      "likes": [
+        "7e3cb692-eb58-4e04-9e42-629906aa9598"
       ]
     },
     {
@@ -131,6 +142,10 @@
           "date": "Nov 15, 2023, 12:54 PM",
           "content": "I am John Smith"
         }
+      ],
+      "likes": [
+        "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+        "7e3cb692-eb58-4e04-9e42-629906aa9598"
       ]
     },
     {
@@ -182,7 +197,8 @@
           "date": "Nov 15, 2023, 4:55 PM",
           "content": "aFsafdsf"
         }
-      ]
+      ],
+      "likes": []
     },
     {
       "id": "b2351135-c344-4641-8971-91c89db3de04",
@@ -201,7 +217,8 @@
           "date": "Nov 16, 2023, 1:06 PM",
           "content": "dtcytfcug"
         }
-      ]
+      ],
+      "likes": []
     },
     {
       "id": "aa97465f-78ad-4540-abd9-1e6fd98086ef",
@@ -211,7 +228,17 @@
       "date": "Nov 16, 2023, 11:08 AM",
       "summary": "Fdhfdhg yrestrset",
       "content": "Resytsy yreys yetye yet",
-      "comments": []
+      "comments": [
+        {
+          "id": "7f392c33-44a6-42d6-ae18-d8b2f5a02b0a",
+          "userId": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+          "user": "Michael Scott",
+          "email": "mScott@mail.ru",
+          "date": "Nov 21, 2023, 1:38 PM",
+          "content": "hey hey"
+        }
+      ],
+      "likes": []
     },
     {
       "id": "48cf5eb9-524a-490c-9ec0-b6c46086a255",
@@ -221,7 +248,8 @@
       "date": "Nov 17, 2023, 11:00 AM",
       "summary": "Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet",
       "content": "Lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet\nlorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet\nlorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet consectur lorem ipsum dolor sit amet",
-      "comments": []
+      "comments": [],
+      "likes": []
     },
     {
       "id": "737467ea-46d1-4ced-9003-939ff55c3b74",
@@ -240,6 +268,10 @@
           "date": "Nov 17, 2023, 6:41 PM",
           "content": "comment"
         }
+      ],
+      "likes": [
+        "7e3cb692-eb58-4e04-9e42-629906aa9598",
+        "587a29ef-da30-4c37-8aa3-94e703b1ac72"
       ]
     },
     {
@@ -259,7 +291,8 @@
           "date": "Nov 17, 2023, 6:45 PM",
           "content": "I am John, say hello to Michael"
         }
-      ]
+      ],
+      "likes": []
     }
   ]
 }

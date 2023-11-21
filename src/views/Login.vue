@@ -22,6 +22,7 @@
       </BaseLabel>
       <BaseInput
           :id="'password'"
+          :type="'password'"
           v-model="password"
           class="w-full"
           :touch="v$.password.$touch"/>
