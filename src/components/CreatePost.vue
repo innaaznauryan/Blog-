@@ -66,7 +66,7 @@ import { createPost, editPost, showModal } from "@/composable/usePosts"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseTextarea from "@/components/BaseTextarea.vue"
-import BaseLabel from "@/components/BaseLabel.vue";
+import BaseLabel from "@/components/BaseLabel.vue"
 
 const props = defineProps({
   post: { type: Object, default: null },

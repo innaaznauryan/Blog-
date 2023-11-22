@@ -24,6 +24,7 @@
 
 <script setup>
 import { defineProps } from "vue"
+import router from "@/router"
 import {
   singlePost,
   showDeletePost,
@@ -32,7 +33,6 @@ import {
   deleteComment,
 } from "@/composable/usePosts"
 import BaseButton from "@/components/BaseButton.vue"
-import router from "@/router"
 
 const props = defineProps({
   post: { type: String, default: null },

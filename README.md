@@ -1,6 +1,13 @@
 # blog
 
 ## Project setup
+
+### Navigates to the root directory
+```
+cd Blog
+```
+
+### Installs npm package
 ```
 npm install
 ```
@@ -8,6 +15,11 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### Starts JSON server to serve data
+```
+json-server --watch store.json
 ```
 
 ### Compiles and minifies for production
