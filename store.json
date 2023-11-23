@@ -144,8 +144,8 @@
         }
       ],
       "likes": [
-        "587a29ef-da30-4c37-8aa3-94e703b1ac72",
-        "7e3cb692-eb58-4e04-9e42-629906aa9598"
+        "7e3cb692-eb58-4e04-9e42-629906aa9598",
+        "587a29ef-da30-4c37-8aa3-94e703b1ac72"
       ]
     },
     {
@@ -229,6 +229,14 @@
       "summary": "Fdhfdhg yrestrset",
       "content": "Resytsy yreys yetye yet",
       "comments": [
+        {
+          "id": "2dbf4de3-58eb-47da-9234-f1474f8bfeab",
+          "userId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+          "user": "John Smith",
+          "email": "john@mail.ru",
+          "date": "Nov 23, 2023, 6:29 PM",
+          "content": "I like this post"
+        },
         {
           "id": "7f392c33-44a6-42d6-ae18-d8b2f5a02b0a",
           "userId": "7e3cb692-eb58-4e04-9e42-629906aa9598",

@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed } from "vue"
+import { ref, computed } from "vue"
 import useValidate from "@vuelidate/core"
 import { required, minLength, maxLength } from "@vuelidate/validators"
 import { createPost, editPost, showModal } from "@/composable/usePosts"

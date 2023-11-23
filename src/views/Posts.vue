@@ -16,17 +16,17 @@
             class="w-3/4 sm:w-1/2 lg:w-1/3 xl:w-1/4 m-2"/>
       </div>
       <div v-if="search" class="flex flex-wrap justify-center">
-        <PostCard v-for="post in filteredPosts" :post="post"/>
+        <PostCard v-for="post in filteredPosts" :post="post" :key="post.id"/>
       </div>
       <div v-else class="flex flex-wrap justify-center">
-        <PostCard v-for="post in posts" :post="post"/>
+        <PostCard v-for="post in posts" :post="post" :key="post.id"/>
       </div>
     </div>
     <BaseButton
         v-if="loggedIn"
         @click="handleClick"
         class="fixed border-2 border-teal-800 hover:border-orange-400"
-        :customClass="{'bg-teal-500': true}"
+        :customClass="{ 'bg-teal-500': true }"
         :style="{ right: '20px', bottom: '20px' }">
       Create Post
     </BaseButton>

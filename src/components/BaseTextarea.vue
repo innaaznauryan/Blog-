@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue"
-
 defineProps({
   modelValue: { type: String, default: null },
   id: { type: String, default: null }

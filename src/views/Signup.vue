@@ -48,7 +48,7 @@
           :type="'password'"
           class="w-full"
           :touch="v$.password.$touch"/>
-      <BaseButton :customClass="{'bg-teal-500': true}">Sign Up</BaseButton>
+      <BaseButton :customClass="{ 'bg-teal-500': true }">Sign Up</BaseButton>
     </form>
     <p v-if="signupError" class="text-red-500 text-center">{{ signupError }}</p>
   </div>
@@ -58,7 +58,7 @@
 import { computed, onMounted, ref } from "vue"
 import useValidate from "@vuelidate/core"
 import { helpers, required, minLength, email as mail } from "@vuelidate/validators"
-import { signUp, getUsers, signupError } from "@/composable/useUsers"
+import { signUp, getUsers, signupError, getLoggedIn } from "@/composable/useUsers"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
@@ -94,6 +94,7 @@ const v$ = useValidate(rules, {fullName, username, email, password})
 onMounted(async() => {
   signupError.value = null
   await getUsers()
+  await getLoggedIn()
 })
 const handleSubmit = async(e) => {
   await v$.value.$validate()

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router"
 import Home from "@/views/Home.vue"
 
 const routes = [
@@ -32,6 +32,15 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: () => import("../views/Signup.vue")
+  },
+  {
+    path: "/:catchAll*",
+    redirect: {name: "404"}
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("../views/NotFound.vue")
   }
 ]
 

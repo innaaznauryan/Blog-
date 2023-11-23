@@ -15,8 +15,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue"
-
 defineProps({
   id: { type: String, default: null },
   error: { type: Boolean, default: null },

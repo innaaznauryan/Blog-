@@ -2,6 +2,7 @@ import { ref } from "vue"
 import { v4 as uuidv4 } from "uuid"
 import { loggedIn } from "@/composable/useUsers"
 import storeService from "@/services/storeService"
+import router from "@/router"
 
 const posts = ref(null)
 const singlePost = ref(null)
@@ -24,7 +25,11 @@ async function getSinglePost(id) {
         const response = await storeService.GET_SINGLE_POST(id)
         singlePost.value = response.data
     } catch(err) {
-        postError.value = err
+        if(err.response.status === 404) {
+            router.push({name: "404"})
+        } else {
+            postError.value = err
+        }
     }
 }
 async function createPost(title, summary, content) {
@@ -104,7 +109,7 @@ async function deleteLike(post, loggedIn) {
     }
 }
 function isFav(post, loggedIn) {
-    return post.value.likes.includes(loggedIn.value.id)
+    return post.value?.likes.includes(loggedIn.value.id)
 }
 function format(string) {
     return string.trim()[0].toUpperCase() + string.trim().slice(1)

@@ -8,8 +8,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue"
-
 defineProps({
   customClass: { type: Object, default: null },
   type: { type: String, default: null }

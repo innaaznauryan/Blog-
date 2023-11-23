@@ -22,7 +22,7 @@
         </div>
       </div>
       <h3 class="pl-10 font-medium text-left" v-if="singlePost.comments.length">Comments</h3>
-      <div class="px-8 py-4 text-left" v-for="comment in singlePost.comments">
+      <div class="px-8 py-4 text-left" v-for="comment in singlePost.comments" :key="comment.id">
         <p class="bg-teal-400 rounded-2xl w-fit inline-block px-2 py-1 mr-1">{{ comment.user }}</p>
         <IconTrash
             v-if="singlePost.userId === loggedIn?.id || comment.userId === loggedIn?.id"
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps, onMounted, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { required } from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import {

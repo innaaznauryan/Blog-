@@ -10,8 +10,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue"
-
 defineProps({
   modelValue: { type: String, default: null },
   type: { type: String, default: "text" },
@@ -22,7 +20,7 @@ defineProps({
 const emit = defineEmits(["update:modelValue"])
 
 const handleInput = (e) => {
-  emit('update:modelValue', e.target.value)
+  emit("update:modelValue", e.target.value)
 }
 </script>
 

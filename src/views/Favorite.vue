@@ -4,7 +4,7 @@
     <div
         v-else-if="posts"
         class="flex flex-wrap justify-center">
-      <PostCard v-for="post in favPosts" :post="post"/>
+      <PostCard v-for="post in favPosts" :post="post" :key="post.id"/>
     </div>
   </div>
 </template>

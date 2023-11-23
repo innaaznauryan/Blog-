@@ -15,14 +15,14 @@
               v-if="singlePost?.userId === loggedIn?.id"
               @click="handleEditPost"
               class="w-1/2 xl:w-1/3"
-              :customClass="{'bg-teal-500': true}">
+              :customClass="{ 'bg-teal-500': true }">
             Edit Post
           </BaseButton>
           <BaseButton
               v-if="singlePost?.userId === loggedIn?.id"
               @click="handleDeletePost"
               class="w-1/2 xl:w-1/3"
-              :customClass="{'bg-red-500': true}">
+              :customClass="{ 'bg-red-500': true }">
             Delete Post
           </BaseButton>
         </div>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted } from "vue"
+import { ref, onMounted } from "vue"
 import {
   singlePost,
   getSinglePost,
