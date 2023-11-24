@@ -66,6 +66,9 @@ const props = defineProps({
   id: String
 })
 
+await getSinglePost(props.id)
+await getLoggedIn()
+
 const scrollTop = ref(null)
 const comment = ref(null)
 const commentIdToDelete = ref(null)
@@ -95,10 +98,8 @@ const handleDeleteComment = (id) => {
   commentIdToDelete.value = id
   scrollTop.value = window.scrollY
 }
-onMounted(async() => {
+onMounted(() => {
   showDeleteComment.value = false
-  await getSinglePost(props.id)
-  await getLoggedIn()
 })
 </script>
 

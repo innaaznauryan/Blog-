@@ -31,7 +31,16 @@
           <pre class="px-8 py-4 text-left whitespace-pre-wrap font-sans">{{ singlePost.content }}</pre>
         </div>
       </div>
-      <Comments :id="id"/>
+      <Transition mode="out-in" name="fade">
+        <Suspense>
+          <template #default>
+            <Comments :id="id"/>
+          </template>
+          <template #fallback>
+            <p>Loading Comments...</p>
+          </template>
+        </Suspense>
+      </Transition>
     </div>
   </div>
   <teleport
@@ -106,5 +115,12 @@ onMounted(async() => {
 </script>
 
 <style scoped>
-
+.fade-enter-active,
+.fade-leave-active{
+  transition: 1s;
+}
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+}
 </style>
