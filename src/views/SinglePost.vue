@@ -34,7 +34,7 @@
       <Transition mode="out-in" name="fade">
         <Suspense>
           <template #default>
-            <Comments :id="id"/>
+            <div><Comments :id="id"/></div>
           </template>
           <template #fallback>
             <p>Loading Comments...</p>
@@ -117,7 +117,7 @@ onMounted(async() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active{
-  transition: 1s;
+  transition: .7s;
 }
 .fade-enter-from,
 .fade-leave-to{
