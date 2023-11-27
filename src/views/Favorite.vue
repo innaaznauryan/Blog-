@@ -1,11 +1,11 @@
 <template>
   <div class="pt-20 text-teal-800 font-sans text-center">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
-    <div
-        v-else-if="posts"
-        class="flex flex-wrap justify-center">
-      <PostCard v-for="post in favPosts" :post="post" :key="post.id"/>
-    </div>
+    <transition v-else name="fade">
+      <div v-if="favPosts" class="flex flex-wrap">
+        <PostCard v-for="post in favPosts" :post="post" :key="post.id"/>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -25,5 +25,12 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-
+.fade-enter-active,
+.fade-leave-active{
+  transition: .7s;
+}
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+}
 </style>

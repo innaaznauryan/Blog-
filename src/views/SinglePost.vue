@@ -1,9 +1,9 @@
 <template>
   <div class="pt-20 text-center text-teal-800">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
-    <div v-else-if="singlePost">
-      <div class="flex flex-col sm:flex-row text-teal-800">
-        <div class="w-full sm:w-1/3 flex flex-col items-center justify-center">
+    <transition v-else name="fade">
+      <div v-if="singlePost" class="flex flex-col sm:flex-row">
+        <div class="flex flex-col w-full sm:w-1/2 items-center">
           <h2 class="p-2 font-medium text-xl">{{ singlePost.title }}</h2>
           <p class="p-2 font-medium">{{ singlePost.user }}</p>
           <p class="p-2 italic">{{ singlePost.date }}</p>
@@ -25,23 +25,16 @@
               :customClass="{ 'bg-red-500': true }">
             Delete Post
           </BaseButton>
+          <div class="w-full">
+            <p class="p-4 font-medium text-lg">{{ singlePost.summary }}</p>
+            <pre class="px-8 py-4 text-left whitespace-pre-wrap font-sans">{{ singlePost.content }}</pre>
+          </div>
         </div>
-        <div class="w-full sm:w-2/3">
-          <p class="p-4 font-medium text-lg">{{ singlePost.summary }}</p>
-          <pre class="px-8 py-4 text-left whitespace-pre-wrap font-sans">{{ singlePost.content }}</pre>
+        <div class="w-full sm:w-1/2">
+          <Comments :id="id"/>
         </div>
       </div>
-      <Transition mode="out-in" name="fade">
-        <Suspense>
-          <template #default>
-            <div><Comments :id="id"/></div>
-          </template>
-          <template #fallback>
-            <p>Loading Comments...</p>
-          </template>
-        </Suspense>
-      </Transition>
-    </div>
+    </transition>
   </div>
   <teleport
       to="#modal"
@@ -54,7 +47,7 @@
   <teleport
       to="#modal"
       :disabled="!showDeletePost">
-    <Delete
+    <Confirm
         v-if="loggedIn && showDeletePost"
         :post="singlePost.id"
         :scrollTop="scrollTop"/>
@@ -78,7 +71,7 @@ import { getLoggedIn, loggedIn } from "@/composable/useUsers"
 import { IconHeart, IconHeartFilled } from "@tabler/icons-vue"
 import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
-import Delete from "@/components/Delete.vue"
+import Confirm from "@/components/Confirm.vue"
 import Comments from "@/components/Comments.vue"
 
 const scrollTop = ref(null)

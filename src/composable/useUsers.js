@@ -15,8 +15,9 @@ async function signUp(fullName, username, email, password) {
         } else if(users.value.find(user => user.email === email.value)) {
             signupError.value = "The email already registered"
         } else {
-            await storeService.SIGNUP(uuidv4(), fullName.value, username.value, email.value, password.value)
-            await logout()
+            const response = await storeService.SIGNUP(uuidv4(), fullName.value, username.value, email.value, password.value)
+            await storeService.LOGIN(response.data)
+            router.push({name: "home"})
         }
     } catch(err) {
         signupError.value = err

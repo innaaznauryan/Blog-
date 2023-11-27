@@ -1,11 +1,12 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-teal-100 text-teal-800 text-center p-10 rounded-lg"
-      :style="{ left: '50%', top: scrollTop + 30 + 'px' }">
-    <p class="p-8 font-medium">Are you sure you want to delete this
-      <span v-if="props.post">post</span>
-      <span v-if="props.comment">comment</span>?
+      class="absolute z-50 transform -translate-x-1/2 w-3/4 sm:w-1/2 lg:w-1/3 bg-teal-100 text-teal-800 text-center p-4 rounded-lg"
+      :style="{ left: '50%', top: scrollTop + 60 + 'px' }">
+    <p class="p-6 font-medium">Are you sure you want to
+      <span v-if="props.post">delete this post</span>
+      <span v-if="props.comment">delete this comment</span>
+      <span v-if="props.logout">logout</span>?
     </p>
     <BaseButton
         @click="confirm"
@@ -28,14 +29,17 @@ import {
   singlePost,
   showDeletePost,
   showDeleteComment,
+  showConfirmLogout,
   deletePost,
-  deleteComment,
+  deleteComment
 } from "@/composable/usePosts"
+import { logout } from "@/composable/useUsers"
 import BaseButton from "@/components/BaseButton.vue"
 
 const props = defineProps({
   post: { type: String, default: null },
   comment: { type: String, default: null },
+  logout: { type: Boolean, default: false },
   scrollTop: { type: Number, default: null }
 })
 const confirm = async() => {
@@ -48,6 +52,10 @@ const confirm = async() => {
     await deleteComment(props.comment, singlePost)
     showDeleteComment.value = false
   }
+  if(props.logout) {
+    await logout()
+    showConfirmLogout.value = false
+  }
 }
 const cancel = () => {
   if(props.post) {
@@ -55,7 +63,11 @@ const cancel = () => {
   }
   if(props.comment) {
     showDeleteComment.value = false
-  }}
+  }
+  if(props.logout) {
+    showConfirmLogout.value = false
+  }
+}
 </script>
 
 <style scoped>

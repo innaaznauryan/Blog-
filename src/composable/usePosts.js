@@ -11,6 +11,7 @@ const commentError = ref(null)
 const showModal = ref(false)
 const showDeletePost = ref(false)
 const showDeleteComment = ref(false)
+const showConfirmLogout = ref(false)
 
 async function getPosts() {
     try {
@@ -123,6 +124,7 @@ export {
     showModal,
     showDeletePost,
     showDeleteComment,
+    showConfirmLogout,
     getPosts,
     getSinglePost,
     createPost,

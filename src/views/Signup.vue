@@ -70,13 +70,7 @@ const password = ref(null)
 
 const rules = computed(() => {
   return {
-    fullName: {
-      required,
-      fNameRequirement: helpers.withMessage(
-          () => "Full name must contain first name, last name and can't contain numbers",
-          (value) => /^[a-zA-Z]+ [a-zA-Z]+$/.test(value)
-      )
-    },
+    fullName: { required, minLength: minLength(6) },
     username: { required, minLength: minLength(6) },
     email: { required, mail },
     password: {

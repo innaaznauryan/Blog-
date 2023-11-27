@@ -13,14 +13,21 @@
       "username": "mScott",
       "email": "mScott@mail.ru",
       "password": "Mscott1"
+    },
+    {
+      "id": "eaed5333-80a6-43b3-b063-3f45c2130fc7",
+      "fullName": "Inna Aznauryan",
+      "username": "Aznaur",
+      "email": "inna.aznauryan@gmail.com",
+      "password": "Password1"
     }
   ],
   "active": {
-    "id": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
-    "fullName": "John Smith",
-    "username": "Johnny",
-    "email": "john@mail.ru",
-    "password": "Varazdat1"
+    "id": "7e3cb692-eb58-4e04-9e42-629906aa9598",
+    "fullName": "Michael Scott",
+    "username": "mScott",
+    "email": "mScott@mail.ru",
+    "password": "Mscott1"
   },
   "posts": [
     {
@@ -105,9 +112,7 @@
           "content": "I am John Smith"
         }
       ],
-      "likes": [
-        "7e3cb692-eb58-4e04-9e42-629906aa9598"
-      ]
+      "likes": []
     },
     {
       "id": "a4550b08-1815-41db-9ded-7d19b072b65d",
@@ -144,8 +149,9 @@
         }
       ],
       "likes": [
-        "7e3cb692-eb58-4e04-9e42-629906aa9598",
-        "587a29ef-da30-4c37-8aa3-94e703b1ac72"
+        "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+        "eaed5333-80a6-43b3-b063-3f45c2130fc7",
+        "7e3cb692-eb58-4e04-9e42-629906aa9598"
       ]
     },
     {
@@ -218,7 +224,9 @@
           "content": "dtcytfcug"
         }
       ],
-      "likes": []
+      "likes": [
+        "eaed5333-80a6-43b3-b063-3f45c2130fc7"
+      ]
     },
     {
       "id": "aa97465f-78ad-4540-abd9-1e6fd98086ef",
@@ -278,7 +286,6 @@
         }
       ],
       "likes": [
-        "7e3cb692-eb58-4e04-9e42-629906aa9598",
         "587a29ef-da30-4c37-8aa3-94e703b1ac72"
       ]
     },
@@ -298,6 +305,59 @@
           "email": "john@mail.ru",
           "date": "Nov 17, 2023, 6:45 PM",
           "content": "I am John, say hello to Michael"
+        }
+      ],
+      "likes": []
+    },
+    {
+      "id": "5262eb66-77b0-4045-b6a1-1334c19c892a",
+      "userId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+      "title": "Jhf ytrytr uytrye",
+      "user": "John Smith",
+      "date": "Nov 27, 2023, 3:24 PM",
+      "summary": "Ytry byr u6ytre utry urte",
+      "content": "Ytr ytryrt utrurte ytry byr u6ytre utry urte  ytry byr u6ytre utry urte  ytry byr u6ytre utry urte  ytry byr u6ytre utry urte  ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte",
+      "comments": [],
+      "likes": []
+    },
+    {
+      "id": "8b71f97e-cab1-4e7c-ae4d-247c2df75ec6",
+      "userId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+      "title": "Ytry byr u6ytre utry urte",
+      "user": "John Smith",
+      "date": "Nov 27, 2023, 3:24 PM",
+      "summary": "Ytry byr u6ytre utry urte ytry byr u6ytre utry urte",
+      "content": "Ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte",
+      "comments": [],
+      "likes": []
+    },
+    {
+      "id": "91bc51af-e8df-40e9-90b2-a6e94656d8e6",
+      "userId": "587a29ef-da30-4c37-8aa3-94e703b1ac72",
+      "title": "Ytry byr u6ytre utry urte",
+      "user": "John Smith",
+      "date": "Nov 27, 2023, 3:24 PM",
+      "summary": "Ytry byr u6ytre utry urte ytry byr u6ytre utry urte",
+      "content": "Ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte ytry byr u6ytre utry urte",
+      "comments": [],
+      "likes": []
+    },
+    {
+      "id": "8bc2bb80-c545-420e-b114-7d92aff5bff4",
+      "userId": "eaed5333-80a6-43b3-b063-3f45c2130fc7",
+      "title": "Dsgdf hthst ytyts thy",
+      "user": "Inna Aznauryan",
+      "date": "Nov 27, 2023, 5:39 PM",
+      "summary": "Dsgdf hthst ytyts thy dsgdf hthst ytyts thy",
+      "content": "Dsgdf hthst ytyts thydsgdf hthst ytyts thydsgdf hthst ytyts thydsgdf hthst ytyts thydsgdf hthst ytyts thydsgdf hthst ytyts thy dsgdf hthst ytyts thy dsgdf hthst ytyts thy",
+      "comments": [
+        {
+          "id": "0efe68a2-7460-4fd2-9e27-389c69ef5023",
+          "userId": "eaed5333-80a6-43b3-b063-3f45c2130fc7",
+          "user": "Inna Aznauryan",
+          "email": "inna.aznauryan@gmail.com",
+          "date": "Nov 27, 2023, 5:43 PM",
+          "content": "Hello"
         }
       ],
       "likes": []

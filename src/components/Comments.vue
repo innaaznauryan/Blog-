@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-col sm:flex-row justify-between">
-    <div class="p-6 w-full sm:w-1/2 order-first sm:order-last">
-      <img :src=background alt="background" class="w-full">
+  <div class="flex flex-col justify-between">
+    <h3 class="font-medium text-center text-lg p-2">Comments</h3>
+    <div class="px-6 py-2 flex justify-center">
+      <img :src=background alt="background" class="w-full xl:w-2/3">
     </div>
-    <div class="w-full sm:w-1/2">
-      <div v-if="loggedIn" class="m-6">
+    <div class="w-full">
+      <div v-if="loggedIn" class="m-6 xl:m-0">
         <form @submit.prevent="handleAddComment">
           <BaseInput
               :placeholder="'Enter a comment'"
@@ -21,7 +22,6 @@
           <p v-if="commentError" class="text-red-500">{{ commentError }}</p>
         </div>
       </div>
-      <h3 class="pl-10 font-medium text-left" v-if="singlePost.comments.length">Comments</h3>
       <div class="px-8 py-4 text-left" v-for="comment in singlePost.comments" :key="comment.id">
         <p class="bg-teal-400 rounded-2xl w-fit inline-block px-2 py-1 mr-1">{{ comment.user }}</p>
         <IconTrash
@@ -37,7 +37,7 @@
   <teleport
       to="#modal"
       :disabled="!showDeleteComment">
-    <Delete
+    <Confirm
         v-if="loggedIn && showDeleteComment"
         :comment="commentIdToDelete"
         :scrollTop="scrollTop"/>
@@ -60,14 +60,11 @@ import { IconTrash } from "@tabler/icons-vue"
 import background from "../assets/image/comments.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
-import Delete from "@/components/Delete.vue"
+import Confirm from "@/components/Confirm.vue"
 
 const props = defineProps({
   id: String
 })
-
-await getSinglePost(props.id)
-await getLoggedIn()
 
 const scrollTop = ref(null)
 const comment = ref(null)
@@ -98,8 +95,11 @@ const handleDeleteComment = (id) => {
   commentIdToDelete.value = id
   scrollTop.value = window.scrollY
 }
-onMounted(() => {
+onMounted(async() => {
+  await getSinglePost(props.id)
+  await getLoggedIn()
   showDeleteComment.value = false
+  commentError.value = false
 })
 </script>
 

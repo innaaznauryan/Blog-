@@ -1,35 +1,37 @@
 <template>
   <div class="pt-20 text-teal-800 font-sans text-center">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
-    <div v-else-if="posts">
-      <div class="flex items-center justify-center">
-        <label
-            :for="'search'"
-            class="cursor-pointer hover:text-teal-500 duration-500">
-          <IconSearch/>
-        </label>
-        <BaseInput
-            v-model="search"
-            :id="'search'"
-            :placeholder="'Search'"
-            @input="handleSearch"
-            class="w-3/4 sm:w-1/2 lg:w-1/3 xl:w-1/4 m-2"/>
+    <transition v-else name="fade" mode="out-in">
+      <div v-if="posts">
+        <div class="flex items-center justify-start sm:justify-center">
+          <label
+              :for="'search'"
+              class="cursor-pointer hover:text-teal-500 duration-500 ml-2 sm:ml-0">
+            <IconSearch/>
+          </label>
+          <BaseInput
+              v-model="search"
+              :id="'search'"
+              :placeholder="'Search'"
+              @input="handleSearch"
+              class="w-1/2 lg:w-1/3 xl:w-1/4 m-2"/>
+          <BaseButton
+              v-if="loggedIn"
+              @click="handleClick"
+              class="fixed border-2 border-teal-800 hover:border-orange-400 shadow-lg"
+              :customClass="{ 'bg-teal-500': true }"
+              :style="{ right: 0 }">
+            Create Post
+          </BaseButton>
+        </div>
+        <div v-if="search" class="flex flex-wrap">
+          <PostCard v-for="post in filteredPosts" :post="post" :key="post.id"/>
+        </div>
+        <div v-else class="flex flex-wrap">
+          <PostCard v-for="post in posts" :post="post" :key="post.id"/>
+        </div>
       </div>
-      <div v-if="search" class="flex flex-wrap justify-center">
-        <PostCard v-for="post in filteredPosts" :post="post" :key="post.id"/>
-      </div>
-      <div v-else class="flex flex-wrap justify-center">
-        <PostCard v-for="post in posts" :post="post" :key="post.id"/>
-      </div>
-    </div>
-    <BaseButton
-        v-if="loggedIn"
-        @click="handleClick"
-        class="fixed border-2 border-teal-800 hover:border-orange-400"
-        :customClass="{ 'bg-teal-500': true }"
-        :style="{ right: '20px', bottom: '20px' }">
-      Create Post
-    </BaseButton>
+    </transition>
     <teleport to="#modal" :disabled="!showModal" v-if="showModal">
       <CreatePost v-if="loggedIn" :scrollTop="scrollTop"/>
     </teleport>
@@ -68,5 +70,12 @@ onMounted(async() => {
 </script>
 
 <style scopped>
-
+.fade-enter-active,
+.fade-leave-active{
+  transition: .7s;
+}
+.fade-enter-from,
+.fade-leave-to{
+  opacity: 0;
+}
 </style>

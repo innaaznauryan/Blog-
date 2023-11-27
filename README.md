@@ -16,10 +16,7 @@
 
 ### Project setup
 
-#### Navigates to the root directory
-```
-cd Blog
-```
+In the root directory:
 
 #### Installs npm package
 ```
