@@ -4,12 +4,12 @@
       class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-teal-100 text-teal-800 px-8 py-4 rounded-lg"
       :style="{ left: '50%', top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
-    <form class="flex flex-col gap-4" @submit.prevent="submitPost">
+    <form class="flex flex-col gap-1" @submit.prevent="submitPost">
       <BaseLabel
           :id="'title'"
           :error="v$.title.$error"
           :errorMessage="v$.title.$errors[0]?.$message"
-          :customClass="{'font-medium': true, 'text-base': true}">
+          :customClass="{'font-medium': true }">
         Title
       </BaseLabel>
       <BaseInput
@@ -20,7 +20,7 @@
           :id="'summary'"
           :error="v$.summary.$error"
           :errorMessage="v$.summary.$errors[0]?.$message"
-          :customClass="{'font-medium': true, 'text-base': true}">
+          :customClass="{'font-medium': true }">
         Summary
       </BaseLabel>
       <BaseInput
@@ -31,7 +31,7 @@
           :id="'content'"
           :error="v$.content.$error"
           :errorMessage="v$.content.$errors[0]?.$message"
-          :customClass="{'font-medium': true, 'text-base': true}">
+          :customClass="{'font-medium': true }">
         Content
       </BaseLabel>
       <BaseTextarea

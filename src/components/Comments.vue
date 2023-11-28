@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col justify-between">
+  <div class="flex flex-col">
     <h3 class="font-medium text-center text-lg p-2">Comments</h3>
     <div class="px-6 py-2 flex justify-center">
-      <img :src=background alt="background" class="w-full xl:w-2/3">
+      <img :src=background alt="background" class="w-full xl:w-3/4">
     </div>
     <div class="w-full">
       <div v-if="loggedIn" class="m-6 xl:m-0">
@@ -10,10 +10,10 @@
           <BaseInput
               :placeholder="'Enter a comment'"
               v-model="comment"
-              class="p-4 w-full xl:w-2/3"
+              class="p-4 w-full lg:w-2/3"
               :customClass="{'bg-white': true}"/>
           <BaseButton
-              class="w-1/2 xl:w-1/4"
+              class="w-1/3 lg:w-1/4 xl:w-1/5"
               :customClass="{'bg-teal-500': true}">
             Publish
           </BaseButton>
@@ -49,11 +49,11 @@ import { computed, onMounted, ref } from "vue"
 import { required } from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import {
-  addComment,
-  commentError,
+  singlePost,
   getSinglePost,
+  addComment,
   showDeleteComment,
-  singlePost
+  commentError
 } from "@/composable/usePosts"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
 import { IconTrash } from "@tabler/icons-vue"

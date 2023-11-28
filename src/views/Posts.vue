@@ -2,7 +2,10 @@
   <div class="pt-20 text-teal-800 font-sans text-center">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
     <transition v-else name="fade" mode="out-in">
-      <div v-if="posts">
+      <div v-if="loading">
+        <p class="text-lg font-medium p-2">Loading...</p>
+      </div>
+      <div v-else>
         <div class="flex items-center justify-start sm:justify-center">
           <label
               :for="'search'"
@@ -13,7 +16,6 @@
               v-model="search"
               :id="'search'"
               :placeholder="'Search'"
-              @input="handleSearch"
               class="w-1/2 lg:w-1/3 xl:w-1/4 m-2"/>
           <BaseButton
               v-if="loggedIn"
@@ -39,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { ref, computed, onMounted } from "vue"
 import { posts, getPosts, showModal, postError } from "@/composable/usePosts"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
 import { IconSearch } from "@tabler/icons-vue"
@@ -50,12 +52,11 @@ import BaseInput from "@/components/BaseInput.vue"
 
 const scrollTop = ref(null)
 const search = ref(null)
-const filteredPosts = ref(null)
+const loading = ref(true)
+const filteredPosts = computed(() => {
+  return posts.value.filter(post => new RegExp(search.value, "i").test(post.title))
+})
 
-const handleSearch = () => {
-  const regex = new RegExp(search.value, "i")
-  filteredPosts.value = posts.value.filter(post => regex.test(post.title))
-}
 const handleClick = () => {
   showModal.value = true
   scrollTop.value = window.scrollY
@@ -66,6 +67,7 @@ onMounted(async() => {
   showModal.value = false
   await getPosts()
   await getLoggedIn()
+  loading.value = false
 })
 </script>
 

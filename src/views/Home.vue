@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { computed, onMounted } from "vue"
 import { loggedIn, getLoggedIn } from "@/composable/useUsers"
 import background from "../assets/image/background.jpg"
 
