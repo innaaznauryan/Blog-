@@ -1,37 +1,31 @@
 <template>
-  <div class="flex flex-col">
-    <h3 class="font-medium text-center text-lg p-2">Comments</h3>
-    <div class="px-6 py-2 flex justify-center">
-      <img :src=background alt="background" class="w-full xl:w-3/4">
+  <div class="flex flex-col gap-6 items-center">
+    <h3 class="font-medium text-center text-lg">Comments</h3>
+    <img :src=background alt="background" class="w-full">
+    <div v-if="loggedIn" class="w-full">
+      <form @submit.prevent="handleAddComment" class="flex flex-col gap-4 items-center">
+        <BaseInput
+            :placeholder="'Enter a comment'"
+            v-model="comment"
+            class="p-3 w-full"/>
+        <BaseButton
+            class="w-1/2 lg:w-1/3 whitespace-nowrap">
+          Publish
+        </BaseButton>
+      </form>
+      <div class="h-10">
+        <p v-if="commentError" class="text-red-500">{{ commentError }}</p>
+      </div>
     </div>
-    <div class="w-full">
-      <div v-if="loggedIn" class="m-6 xl:m-0">
-        <form @submit.prevent="handleAddComment">
-          <BaseInput
-              :placeholder="'Enter a comment'"
-              v-model="comment"
-              class="p-4 w-full lg:w-2/3"
-              :customClass="{'bg-white': true}"/>
-          <BaseButton
-              class="w-1/3 lg:w-1/4 xl:w-1/5"
-              :customClass="{'bg-teal-500': true}">
-            Publish
-          </BaseButton>
-        </form>
-        <div class="h-10">
-          <p v-if="commentError" class="text-red-500">{{ commentError }}</p>
-        </div>
-      </div>
-      <div class="px-8 py-4 text-left" v-for="comment in singlePost.comments" :key="comment.id">
-        <p class="bg-teal-400 rounded-2xl w-fit inline-block px-2 py-1 mr-1">{{ comment.user }}</p>
-        <IconTrash
-            v-if="singlePost.userId === loggedIn?.id || comment.userId === loggedIn?.id"
-            size="20"
-            @click="handleDeleteComment(comment.id)"
-            class="cursor-pointer inline-block hover:text-teal-500 duration-500"/>
-        <p class="italic p-2">{{ comment.date }}</p>
-        <p class="p-2 my-2 bg-white rounded-2xl w-fit inline-block">{{ comment.content }}</p>
-      </div>
+    <div class="self-start text-left mb-4" v-for="comment in singlePost.comments" :key="comment.id">
+      <p class="bg-orange-300 rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
+      <IconTrash
+          v-if="singlePost.userId === loggedIn?.id || comment.userId === loggedIn?.id"
+          size="20"
+          @click="handleDeleteComment(comment.id)"
+          class="cursor-pointer inline-block hover:text-orange-300 duration-500 ml-2"/>
+      <p class=" m-2 italic">{{ comment.date }}</p>
+      <p class="py-2 px-4 bg-white rounded-2xl w-fit inline-block">{{ comment.content }}</p>
     </div>
   </div>
   <teleport

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-20 text-teal-800 font-sans text-center">
+  <div class="pt-20 text-stone-900 font-sans text-center">
     <p
         v-if="loggedIn"
         class="font-medium p-4 text-xl">

@@ -1,7 +1,7 @@
 <template>
   <button
-      class="py-4 px-2 m-2 rounded-lg font-medium duration-500 hover:text-orange-400 self-center"
       :class="customClass"
+      class="p-3 rounded-lg font-medium duration-500 bg-stone-900 text-orange-300 hover:bg-orange-300 hover:text-stone-900 self-center"
       :type="type">
     <slot>Submit</slot>
   </button>

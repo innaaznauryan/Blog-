@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-teal-100 text-teal-800 px-8 py-4 rounded-lg"
+      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-orange-50 text-stone-900 px-8 py-2 rounded-lg"
       :style="{ left: '50%', top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
     <form class="flex flex-col gap-1" @submit.prevent="submitPost">
@@ -38,22 +38,20 @@
           :id="'content'"
           v-model="content"
           @blur="v$.content.$touch()"/>
-      <div class="text-center">
+      <div class="flex gap-2 justify-center pt-4">
         <BaseButton
-            :type="'submit'"
-            :customClass="{'bg-teal-500': true}">
+            :type="'submit'">
           Publish
         </BaseButton>
         <BaseButton
             :type="'button'"
-            @click="cancel"
-            :customClass="{'bg-red-500': true}">
+            @click="cancel">
           Cancel
         </BaseButton>
       </div>
     </form>
     <div class="h-6">
-      <p v-if="formError" class="text-red-500 text-center">Cannot submit this form</p>
+      <p v-if="formError" class="text-red-500 text-center text-sm">Cannot submit this form</p>
     </div>
   </div>
 </template>

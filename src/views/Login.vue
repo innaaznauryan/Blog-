@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-20 m-auto text-teal-800 font-sans w-3/4 md:w-1/2 xl:w-1/4">
+  <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
     <form
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
@@ -26,7 +26,7 @@
           v-model="password"
           class="w-full"
           :touch="v$.password.$touch"/>
-      <BaseButton :customClass="{'bg-teal-500': true}">Sign In</BaseButton>
+      <BaseButton :customClass="{ 'hover:text-stone-900': true, 'hover:bg-orange-300': true }">Sign In</BaseButton>
     </form>
     <p v-if="loginError" class="text-red-500 text-center">{{ loginError }}</p>
   </div>

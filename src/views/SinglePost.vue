@@ -1,37 +1,34 @@
 <template>
-  <div class="pt-20 text-center text-teal-800">
+  <div class="pt-20 text-center text-stone-900">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
     <transition v-else name="fade" mode="out-in">
       <div v-if="loading">
         <p class="text-lg font-medium p-2">Loading...</p>
       </div>
-      <div v-else class="flex flex-col sm:flex-row">
-        <div class="flex flex-col w-full sm:w-1/2 items-center">
-          <h2 class="p-2 font-medium text-xl">{{ singlePost.title }}</h2>
-          <p class="p-2 font-medium">{{ singlePost.user }}</p>
-          <p class="p-2 italic">{{ singlePost.date }}</p>
-          <div v-if="loggedIn" @click="handleLike" class="cursor-pointer m-2">
+      <div v-else class="flex flex-col gap-20 px-4 md:px-10 lg:px-40 xl:px-60 2xl:px-80 sm:flex-row">
+        <div class="flex flex-col gap-4 w-full sm:w-1/2 items-center">
+          <h2 class="font-medium text-xl">{{ singlePost.title }}</h2>
+          <p class="font-medium">{{ singlePost.user }}</p>
+          <p class="italic">{{ singlePost.date }}</p>
+          <div v-if="loggedIn" @click="handleLike" class="cursor-pointer">
             <IconHeartFilled v-if="like"/>
             <IconHeart v-else/>
           </div>
           <BaseButton
               v-if="singlePost?.userId === loggedIn?.id"
               @click="handleEditPost"
-              class="w-1/3 lg:w-1/4 xl:w-1/5"
-              :customClass="{ 'bg-teal-500': true }">
+              class="w-1/2 lg:w-1/3 whitespace-nowrap">
             Edit Post
           </BaseButton>
           <BaseButton
               v-if="singlePost?.userId === loggedIn?.id"
               @click="handleDeletePost"
-              class="w-1/3 lg:w-1/4 xl:w-1/5"
+              class="w-1/2 lg:w-1/3 whitespace-nowrap"
               :customClass="{ 'bg-red-500': true }">
             Delete Post
           </BaseButton>
-          <div class="w-full">
-            <p class="p-4 font-medium text-lg">{{ singlePost.summary }}</p>
-            <pre class="px-8 py-4 text-left whitespace-pre-wrap font-sans">{{ singlePost.content }}</pre>
-          </div>
+          <p class="font-medium text-lg">{{ singlePost.summary }}</p>
+          <pre class="text-left whitespace-pre-wrap font-sans">{{ singlePost.content }}</pre>
         </div>
         <div class="w-full sm:w-1/2">
           <Comments :id="id"/>

@@ -1,25 +1,25 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-3/4 sm:w-1/2 lg:w-1/3 bg-teal-100 text-teal-800 text-center p-4 rounded-lg"
+      class="absolute z-50 transform -translate-x-1/2 w-2/3 sm:w-fit bg-orange-50 text-stone-900 text-center p-4 rounded-lg"
       :style="{ left: '50%', top: scrollTop + 60 + 'px' }">
-    <p class="p-6 font-medium">Are you sure you want to
+    <p class="p-2 font-medium">Are you sure you want to
       <span v-if="props.post">delete this post</span>
       <span v-if="props.comment">delete this comment</span>
       <span v-if="props.logout">logout</span>?
     </p>
-    <BaseButton
+    <div class="flex gap-2 justify-center">
+      <BaseButton
         @click="confirm"
-        class="px-4"
-        :customClass="{'bg-red-500': true}">
-      Yes
-    </BaseButton>
-    <BaseButton
+        class="px-4 py-2">
+        Yes
+      </BaseButton>
+      <BaseButton
         @click="cancel"
-        class="px-4"
-        :customClass="{'bg-teal-500': true}">
-      No
-    </BaseButton>
+        class="px-4 py-2">
+        No
+      </BaseButton>
+    </div>
   </div>
 </template>
 

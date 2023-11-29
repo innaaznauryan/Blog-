@@ -1,12 +1,13 @@
 <template>
-  <div class="pt-20 text-teal-800 font-sans text-center">
+  <div class="pt-[70px] text-stone-900 font-sans text-center">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
     <transition v-else name="fade" mode="out-in">
       <div v-if="loading">
         <p class="text-lg font-medium p-2">Loading...</p>
       </div>
       <div v-else>
-        <div v-if="favPosts.length" class="flex flex-wrap">
+        <h3 class="text-xl font-medium p-4">Favorites</h3>
+        <div v-if="favPosts.length" class="flex flex-wrap mx-2 md:mx-10 lg:mx-40 xl:mx-60 2xl:mx-80">
           <PostCard v-for="post in favPosts" :post="post" :key="post.id"/>
         </div>
         <p v-else class="text-lg font-medium p-2">You have no favorite posts yet</p>
