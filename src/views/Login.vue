@@ -26,7 +26,7 @@
           v-model="password"
           class="w-full"
           :touch="v$.password.$touch"/>
-      <BaseButton :customClass="{ 'hover:text-stone-900': true, 'hover:bg-orange-300': true }">Sign In</BaseButton>
+      <BaseButton>Sign In</BaseButton>
     </form>
     <p v-if="loginError" class="text-red-500 text-center">{{ loginError }}</p>
   </div>

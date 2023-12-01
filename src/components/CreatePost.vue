@@ -1,8 +1,8 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-orange-50 text-stone-900 px-8 py-2 rounded-lg"
-      :style="{ left: '50%', top: scrollTop + 30 + 'px' }">
+      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-orange-50 text-stone-900 px-8 py-2 rounded-lg left-1/2"
+      :style="{ top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
     <form class="flex flex-col gap-1" @submit.prevent="submitPost">
       <BaseLabel
@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import {ref, computed, onMounted} from "vue"
 import useValidate from "@vuelidate/core"
 import { required, minLength, maxLength } from "@vuelidate/validators"
 import { createPost, editPost, showModal } from "@/composable/usePosts"
@@ -67,10 +67,10 @@ import BaseTextarea from "@/components/BaseTextarea.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
 
 const props = defineProps({
-  post: { type: Object, default: null },
-  scrollTop: { type: Number, default: null }
+  post: { type: Object, default: null }
 })
 
+const scrollTop = ref(null)
 const title = ref(props.post?.title || null)
 const summary = ref(props.post?.summary || null)
 const content = ref(props.post?.content || null)
@@ -111,6 +111,9 @@ const submitPost = async() => {
 const cancel = () => {
   showModal.value = false
 }
+onMounted(() => {
+  scrollTop.value = window.scrollY
+})
 </script>
 
 <style scoped>

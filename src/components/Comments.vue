@@ -29,12 +29,8 @@
     </div>
   </div>
   <teleport
-      to="#modal"
-      :disabled="!showDeleteComment">
-    <Confirm
-        v-if="loggedIn && showDeleteComment"
-        :comment="commentIdToDelete"
-        :scrollTop="scrollTop"/>
+      to="#modal">
+    <DialogsWrapper/>
   </teleport>
 </template>
 
@@ -46,23 +42,20 @@ import {
   singlePost,
   getSinglePost,
   addComment,
-  showDeleteComment,
+  deleteComment,
   commentError
 } from "@/composable/usePosts"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
+import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 import { IconTrash } from "@tabler/icons-vue"
 import background from "../assets/image/comments.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
-import Confirm from "@/components/Confirm.vue"
 
 const props = defineProps({
   id: String
 })
-
-const scrollTop = ref(null)
 const comment = ref(null)
-const commentIdToDelete = ref(null)
 
 const rules = computed(() => {
   return {
@@ -84,15 +77,17 @@ const handleAddComment = async(e) => {
   }
   e.target.reset()
 }
-const handleDeleteComment = (id) => {
-  showDeleteComment.value = true
-  commentIdToDelete.value = id
-  scrollTop.value = window.scrollY
+const handleDeleteComment = (commentId) => {
+  useConfirmBeforeAction(
+      async() => {
+        await deleteComment(commentId, singlePost)
+      },
+      {text: "Are you sure you want to delete this comment?"}
+  )
 }
 onMounted(async() => {
   await getSinglePost(props.id)
   await getLoggedIn()
-  showDeleteComment.value = false
   commentError.value = false
 })
 </script>

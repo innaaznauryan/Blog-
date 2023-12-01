@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="!loading" class="flex justify-between fixed w-full bg-stone-900 text-orange-300 text-base sm:text-lg md:text-2xl px-4 md:px-10">
+  <nav v-if="!loading" class="flex justify-between fixed w-full bg-stone-900 text-orange-300 text-lg sm:text-xl md:text-2xl px-4 md:px-10">
     <div class="flex gap-4">
       <router-link
           :to="{ name: 'home' }"
@@ -40,27 +40,26 @@
     </div>
   </nav>
   <teleport
-      to="#modal"
-      :disabled="!showConfirmLogout">
-    <Confirm
-        v-if="loggedIn && showConfirmLogout"
-        :logout="true"
-        :scrollTop="scrollTop"/>
+      to="#modal">
+    <DialogsWrapper/>
   </teleport>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
-import { showConfirmLogout } from "@/composable/usePosts"
-import Confirm from "@/components/Confirm.vue"
+import { logout } from "@/composable/useUsers"
+import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 
-const scrollTop = ref(null)
 const loading = ref(true)
 
 const handleClick = () => {
-  showConfirmLogout.value = true
-  scrollTop.value = window.scrollY
+  useConfirmBeforeAction(
+      async() => {
+        await logout()
+      },
+      {text: "Are you sure you want to log out?"}
+  )
 }
 
 onMounted(async() => {

@@ -23,8 +23,7 @@
           <BaseButton
               v-if="singlePost?.userId === loggedIn?.id"
               @click="handleDeletePost"
-              class="w-1/2 lg:w-1/3 whitespace-nowrap"
-              :customClass="{ 'bg-red-500': true }">
+              class="w-1/2 lg:w-1/3 whitespace-nowrap">
             Delete Post
           </BaseButton>
           <p class="font-medium text-lg">{{ singlePost.summary }}</p>
@@ -41,43 +40,37 @@
       :disabled="!showModal">
     <CreatePost
         v-if="loggedIn && showModal"
-        :post="singlePost"
-        :scrollTop="scrollTop"/>
+        :post="singlePost"/>
   </teleport>
   <teleport
-      to="#modal"
-      :disabled="!showDeletePost">
-    <Confirm
-        v-if="loggedIn && showDeletePost"
-        :post="singlePost.id"
-        :scrollTop="scrollTop"/>
+      to="#modal">
+    <DialogsWrapper/>
   </teleport>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue"
+import router from "@/router"
 import {
   singlePost,
   getSinglePost,
   showModal,
-  showDeletePost,
   postError,
+  deletePost,
   addLike,
   deleteLike,
   isFav
 } from "@/composable/usePosts"
 import { getLoggedIn, loggedIn } from "@/composable/useUsers"
 import { IconHeart, IconHeartFilled } from "@tabler/icons-vue"
+import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
-import Confirm from "@/components/Confirm.vue"
 import Comments from "@/components/Comments.vue"
 
 const props = defineProps({
   id: String
 })
-
-const scrollTop = ref(null)
 const like = ref(false)
 const loading = ref(true)
 
@@ -87,17 +80,19 @@ const handleLike = async() => {
 }
 const handleEditPost = () => {
   showModal.value = true
-  showDeletePost.value = false
-  scrollTop.value = window.scrollY
 }
 const handleDeletePost = () => {
-  showDeletePost.value = true
-  showModal.value = false
-  scrollTop.value = window.scrollY
+  useConfirmBeforeAction(
+      async() => {
+        await deletePost(props.id)
+        await router.push({name: "posts"})
+      },
+      {text: "Are you sure you want to delete this post?"}
+  )
 }
+
 onMounted(async() => {
   showModal.value = false
-  showDeletePost.value = false
   await getSinglePost(props.id)
   await getLoggedIn()
   if(loggedIn.value) {

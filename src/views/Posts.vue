@@ -33,8 +33,10 @@
         </div>
       </div>
     </transition>
-    <teleport to="#modal" :disabled="!showModal" v-if="showModal">
-      <CreatePost v-if="loggedIn" :scrollTop="scrollTop"/>
+    <teleport
+        to="#modal"
+        :disabled="!showModal">
+      <CreatePost v-if="loggedIn && showModal"/>
     </teleport>
   </div>
 </template>
@@ -49,21 +51,17 @@ import BaseButton from "@/components/BaseButton.vue"
 import PostCard from "@/components/PostCard.vue"
 import BaseInput from "@/components/BaseInput.vue"
 
-const scrollTop = ref(null)
-const search = ref(null)
 const loading = ref(true)
+const search = ref(null)
 const filteredPosts = computed(() => {
   return posts.value.filter(post => new RegExp(search.value, "i").test(post.title))
 })
 
 const handleClick = () => {
   showModal.value = true
-  scrollTop.value = window.scrollY
   search.value = null
-  filteredPosts.value = null
 }
 onMounted(async() => {
-  showModal.value = false
   await getPosts()
   await getLoggedIn()
   loading.value = false

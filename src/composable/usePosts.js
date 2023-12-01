@@ -9,9 +9,6 @@ const singlePost = ref(null)
 const postError = ref(null)
 const commentError = ref(null)
 const showModal = ref(false)
-const showDeletePost = ref(false)
-const showDeleteComment = ref(false)
-const showConfirmLogout = ref(false)
 
 async function getPosts() {
     try {
@@ -84,9 +81,9 @@ async function addComment(post, comment, loggedIn) {
         postError.value = err
     }
 }
-async function deleteComment(comment, post) {
+async function deleteComment(commentId, post) {
     try {
-        const comments = post.value.comments.filter(elem => elem.id !== comment)
+        const comments = post.value.comments.filter(comment => comment.id !== commentId)
         post.value = {...post.value, comments}
         await storeService.UPDATE_POST(post.value)
     } catch(err) {
@@ -122,9 +119,6 @@ export {
     postError,
     commentError,
     showModal,
-    showDeletePost,
-    showDeleteComment,
-    showConfirmLogout,
     getPosts,
     getSinglePost,
     createPost,
