@@ -45,7 +45,7 @@ import {
   deleteComment,
   commentError
 } from "@/composable/usePosts"
-import { getLoggedIn, loggedIn } from "@/composable/useUsers"
+import { loggedIn } from "@/composable/useUsers"
 import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 import { IconTrash } from "@tabler/icons-vue"
 import background from "../assets/image/comments.jpg"
@@ -87,7 +87,6 @@ const handleDeleteComment = (commentId) => {
 }
 onMounted(async() => {
   await getSinglePost(props.id)
-  await getLoggedIn()
   commentError.value = false
 })
 </script>

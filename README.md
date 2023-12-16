@@ -11,7 +11,7 @@
 - Vue 3
 - Vue Router
 - Vuelidate
-- JSON server
+- Firebase
 - Axios for HTTP Requests
 
 ### Project setup
@@ -26,11 +26,6 @@ npm install
 #### Compiles and hot-reloads for development
 ```
 npm run serve
-```
-
-#### Starts JSON server to serve data
-```
-json-server --watch store.json
 ```
 
 #### Compiles and minifies for production

@@ -1,5 +1,6 @@
 <template>
   <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
+    <h2 class="font-medium p-4 text-xl text-center">Sign up!</h2>
     <form
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
@@ -14,7 +15,7 @@
           v-model="fullName"
           class="w-full"
           :touch="v$.fullName.$touch"/>
-      <BaseLabel
+      <!-- <BaseLabel
           :id="'username'"
           :error="v$.username.$error"
           :errorMessage="v$.username.$errors[0]?.$message">
@@ -24,7 +25,7 @@
           :id="'username'"
           v-model="username"
           class="w-full"
-          :touch="v$.username.$touch"/>
+          :touch="v$.username.$touch"/> -->
       <BaseLabel
           :id="'email'"
           :error="v$.email.$error"
@@ -58,7 +59,7 @@
 import { computed, onMounted, ref } from "vue"
 import useValidate from "@vuelidate/core"
 import { helpers, required, minLength, email as mail } from "@vuelidate/validators"
-import { signUp, getUsers, signupError, getLoggedIn } from "@/composable/useUsers"
+import { signUp, signupError } from "@/composable/useUsers"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
@@ -71,7 +72,6 @@ const password = ref(null)
 const rules = computed(() => {
   return {
     fullName: { required, minLength: minLength(6) },
-    username: { required, minLength: minLength(6) },
     email: { required, mail },
     password: {
       required,
@@ -83,17 +83,15 @@ const rules = computed(() => {
     }
   }
 })
-const v$ = useValidate(rules, {fullName, username, email, password})
+const v$ = useValidate(rules, {fullName, email, password})
 
 onMounted(async() => {
   signupError.value = null
-  await getUsers()
-  await getLoggedIn()
 })
 const handleSubmit = async(e) => {
   await v$.value.$validate()
   if(!v$.value.$error) {
-    await signUp(fullName, username, email, password)
+    await signUp(email, password, fullName)
     if(signupError) {
       setTimeout(() => {
         signupError.value = null

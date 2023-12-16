@@ -1,19 +1,20 @@
 <template>
   <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
+    <h2 class="font-medium p-4 text-xl text-center">Sign in!</h2>
     <form
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
       <BaseLabel
-          :id="'username'"
-          :error="v$.username.$error"
-          :errorMessage="v$.username.$errors[0]?.$message">
-        Username:
+          :id="'email'"
+          :error="v$.email.$error"
+          :errorMessage="v$.email.$errors[0]?.$message">
+        Email:
       </BaseLabel>
       <BaseInput
-          :id="'username'"
-          v-model="username"
+          :id="'email'"
+          v-model="email"
           class="w-full"
-          :touch="v$.username.$touch"/>
+          :touch="v$.email.$touch"/>
       <BaseLabel
           :id="'password'"
           :error="v$.password.$error"
@@ -34,28 +35,28 @@
 
 <script setup>
 import { computed, onMounted, ref } from "vue"
-import { login, getUsers, loginError } from "@/composable/useUsers"
-import { required } from "@vuelidate/validators"
+import { login, loginError } from "@/composable/useUsers"
+import { required, email as mail } from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
 
-const username = ref(null)
+const email = ref(null)
 const password = ref(null)
 
 const rules = computed(() => {
   return {
-    username: { required },
+    email: { required, mail },
     password: { required }
   }
 })
-const v$ = useValidate(rules, {username, password})
+const v$ = useValidate(rules, {email, password})
 
 const handleSubmit = async() => {
   await v$.value.$validate()
   if(!v$.value.$error) {
-    await login(username, password)
+    await login(email, password)
     if(loginError) {
       setTimeout(() => {
         loginError.value = null
@@ -63,9 +64,6 @@ const handleSubmit = async() => {
     }
   }
 }
-onMounted(async() => {
-  await getUsers()
-})
 </script>
 
 <style scoped>

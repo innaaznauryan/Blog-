@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue"
-import { loggedIn, getLoggedIn } from "@/composable/useUsers"
+import { loggedIn } from "@/composable/useUsers"
 import { posts, getPosts, postError } from "@/composable/usePosts"
 import PostCard from "@/components/PostCard.vue"
 
@@ -29,7 +29,6 @@ const favPosts = computed(() => {
 
 onMounted(async () => {
   await getPosts()
-  await getLoggedIn()
   loading.value = false
 })
 </script>
@@ -37,7 +36,7 @@ onMounted(async () => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active{
-  transition: .7s;
+  transition: .5s;
 }
 .fade-enter-from,
 .fade-leave-to{

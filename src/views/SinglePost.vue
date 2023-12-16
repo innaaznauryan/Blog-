@@ -61,7 +61,7 @@ import {
   deleteLike,
   isFav
 } from "@/composable/usePosts"
-import { getLoggedIn, loggedIn } from "@/composable/useUsers"
+import { loggedIn } from "@/composable/useUsers"
 import { IconHeart, IconHeartFilled } from "@tabler/icons-vue"
 import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 import CreatePost from "@/components/CreatePost.vue"
@@ -94,7 +94,6 @@ const handleDeletePost = () => {
 onMounted(async() => {
   showModal.value = false
   await getSinglePost(props.id)
-  await getLoggedIn()
   if(loggedIn.value) {
     like.value = isFav(singlePost, loggedIn)
   }
@@ -105,7 +104,7 @@ onMounted(async() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active{
-  transition: .7s;
+  transition: .5s;
 }
 .fade-enter-from,
 .fade-leave-to{

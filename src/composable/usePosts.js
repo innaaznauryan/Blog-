@@ -1,10 +1,10 @@
 import { ref } from "vue"
 import { v4 as uuidv4 } from "uuid"
 import { loggedIn } from "@/composable/useUsers"
-import storeService from "@/services/storeService"
+import firestore from "@/services/firestore"
 import router from "@/router"
 
-const posts = ref(null)
+const posts = ref([])
 const singlePost = ref(null)
 const postError = ref(null)
 const commentError = ref(null)
@@ -12,18 +12,25 @@ const showModal = ref(false)
 
 async function getPosts() {
     try {
-        const response = await storeService.GET_POSTS()
-        posts.value = response.data
+        const response = await firestore.GET_POSTS()
+        const data = []
+        response.docs.forEach(doc => {
+            data.push({...doc.data(), id: doc.id})
+        })
+        posts.value = data
     } catch(err) {
         postError.value = err
     }
 }
 async function getSinglePost(id) {
     try {
-        const response = await storeService.GET_SINGLE_POST(id)
-        singlePost.value = response.data
+        const response = await firestore.GET_SINGLE_POST(id)
+        if(!response.exists()) {
+            throw response
+        }
+        singlePost.value = response.data()
     } catch(err) {
-        if(err.response.status === 404) {
+        if(!err.exists()) {
             router.push({name: "404"})
         } else {
             postError.value = err
@@ -33,7 +40,6 @@ async function getSinglePost(id) {
 async function createPost(title, summary, content) {
     try {
         const newPost = {
-            id: uuidv4(),
             userId: loggedIn.value.id,
             title: format(title.value),
             user: loggedIn.value.fullName,
@@ -43,7 +49,7 @@ async function createPost(title, summary, content) {
             comments: [],
             likes: []
         }
-        const response = await storeService.CREATE_POST(newPost)
+        const response = await firestore.CREATE_POST(newPost)
         posts.value.push(response.data)
     } catch(err) {
         postError.value = err
@@ -54,14 +60,14 @@ async function editPost(post, title, summary, content) {
         post.title = format(title.value)
         post.summary = format(summary.value)
         post.content = format(content.value)
-        await storeService.UPDATE_POST(post)
+        await firestore.UPDATE_POST(post)
     } catch(err) {
         postError.value = err
     }
 }
 async function deletePost(id) {
     try {
-        await storeService.DELETE_POST(id)
+        await firestore.DELETE_POST(id)
     } catch(err) {
         postError.value = err
     }
@@ -76,7 +82,7 @@ async function addComment(post, comment, loggedIn) {
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
             content: comment.value.trim()
         })
-        await storeService.UPDATE_POST(post.value)
+        await firestore.UPDATE_POST(post.value)
     } catch(err) {
         postError.value = err
     }
@@ -85,7 +91,7 @@ async function deleteComment(commentId, post) {
     try {
         const comments = post.value.comments.filter(comment => comment.id !== commentId)
         post.value = {...post.value, comments}
-        await storeService.UPDATE_POST(post.value)
+        await firestore.UPDATE_POST(post.value)
     } catch(err) {
         postError.value = err
     }
@@ -93,7 +99,7 @@ async function deleteComment(commentId, post) {
 async function addLike(post, loggedIn) {
     try {
         post.value.likes.push(loggedIn.value.id)
-        await storeService.UPDATE_POST(post.value)
+        await firestore.UPDATE_POST(post.value)
     } catch(err) {
         postError.value = err
     }
@@ -101,7 +107,7 @@ async function addLike(post, loggedIn) {
 async function deleteLike(post, loggedIn) {
     try {
         post.value = {...post.value, likes: post.value.likes.filter(id => id !== loggedIn.value.id)}
-        await storeService.UPDATE_POST(post.value)
+        await firestore.UPDATE_POST(post.value)
     } catch(err) {
         postError.value = err
     }

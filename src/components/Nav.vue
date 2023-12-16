@@ -47,9 +47,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
-import { getLoggedIn, loggedIn } from "@/composable/useUsers"
-import { logout } from "@/composable/useUsers"
+import { loggedIn, logout } from "@/composable/useUsers"
 import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
+import {onAuthStateChanged, auth} from "@/services/firestore.js"
 
 const loading = ref(true)
 
@@ -62,8 +62,10 @@ const handleClick = () => {
   )
 }
 
-onMounted(async() => {
-  await getLoggedIn()
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    loggedIn.value = user ? {id: user.uid, email: user.email} : null
+  })
   loading.value = false
 })
 </script>

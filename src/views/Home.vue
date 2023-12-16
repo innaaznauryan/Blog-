@@ -22,13 +22,8 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
-import { loggedIn, getLoggedIn } from "@/composable/useUsers"
+import { loggedIn } from "@/composable/useUsers"
 import background from "../assets/image/background.jpg"
-
-onMounted(async() => {
-  await getLoggedIn()
-})
 </script>
 
 <style scoped>

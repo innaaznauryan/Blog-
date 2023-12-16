@@ -1,62 +1,39 @@
 import { ref } from "vue"
-import { v4 as uuidv4 } from "uuid"
-import storeService from "@/services/storeService"
 import router from "@/router"
+import firestore from "@/services/firestore"
 
 const loginError = ref(null)
 const signupError = ref(null)
 const loggedIn = ref(null)
-const users = ref(null)
 
-async function signUp(fullName, username, email, password) {
+async function signUp(email, password, fullName) {
     try {
-        if(users.value.find(user => user.username === username.value)){
-            signupError.value = "The username already registered"
-        } else if(users.value.find(user => user.email === email.value)) {
-            signupError.value = "The email already registered"
+        await firestore.SIGNUP(email.value, password.value)
+        router.push({name: "home"})
+    } catch(err) {
+        if(err.message.includes("already-in-use")) {
+            signupError.value = "This user is already registered"
         } else {
-            const response = await storeService.SIGNUP(uuidv4(), fullName.value, username.value, email.value, password.value)
-            await storeService.LOGIN(response.data)
-            router.push({name: "home"})
+            signupError.value = err
         }
-    } catch(err) {
-        signupError.value = err
     }
 }
-async function login(username, password) {
+async function login(email, password) {
     try {
-        const foundUser = users.value.find(user => user.username === username.value && user.password === password.value)
-        if(foundUser) {
-            loggedIn.value = foundUser
-            await storeService.LOGIN(loggedIn.value)
-            router.push({name: "home"})
+        await firestore.LOGIN(email, password)
+        router.push({name: "home"})
+    } catch(err) {
+        if(err.message.includes("missing")) {
+            loginError.value = "Wrong email and/or password"
         } else {
-            loggedIn.value = null
-            loginError.value = "Wrong username and/or password"
+            loginError.value = err
         }
-    } catch(err) {
-        loginError.value = err
     }
 }
-async function getUsers() {
-    try {
-        const response = await storeService.GET_USERS()
-        users.value = response.data
-    } catch(err) {
-        console.log(err)
-    }
-}
-async function getLoggedIn() {
-    try {
-        const response = await storeService.GET_LOGGED_IN()
-        loggedIn.value = response.data.id ? response.data : null
-    } catch (err) {
-        console.log(err)
-    }
-}
+
 async function logout() {
     try {
-        await storeService.LOGOUT()
+        await firestore.LOGOUT()
         loggedIn.value = null
         router.push({name: "home"})
     } catch(err) {
@@ -65,13 +42,10 @@ async function logout() {
 }
 
 export {
-    loggedIn,
-    users,
     signUp,
     login,
-    getUsers,
-    getLoggedIn,
     logout,
+    loggedIn,
     loginError,
     signupError
 }

@@ -43,8 +43,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue"
-import { posts, getPosts, showModal, postError } from "@/composable/usePosts"
-import { getLoggedIn, loggedIn } from "@/composable/useUsers"
+import { posts, getPosts, showModal, postError, getSinglePost } from "@/composable/usePosts"
+import { loggedIn } from "@/composable/useUsers"
 import { IconSearch } from "@tabler/icons-vue"
 import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
@@ -63,7 +63,6 @@ const handleClick = () => {
 }
 onMounted(async() => {
   await getPosts()
-  await getLoggedIn()
   loading.value = false
 })
 </script>
@@ -71,7 +70,7 @@ onMounted(async() => {
 <style scopped>
 .fade-enter-active,
 .fade-leave-active{
-  transition: .7s;
+  transition: .5s;
 }
 .fade-enter-from,
 .fade-leave-to{
