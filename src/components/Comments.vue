@@ -20,7 +20,7 @@
     <div class="self-start text-left mb-4" v-for="comment in singlePost.comments" :key="comment.id">
       <p class="bg-orange-300 rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
       <IconTrash
-          v-if="singlePost.userId === loggedIn?.id || comment.userId === loggedIn?.id"
+          v-if="singlePost.userId === loggedIn?.uid || comment.userId === loggedIn?.uid"
           size="20"
           @click="handleDeleteComment(comment.id)"
           class="cursor-pointer inline-block hover:text-orange-300 duration-500 ml-2"/>

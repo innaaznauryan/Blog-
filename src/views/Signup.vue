@@ -1,6 +1,6 @@
 <template>
   <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
-    <h2 class="font-medium p-4 text-xl text-center">Sign up!</h2>
+    <h2 class="font-medium pt-4 text-xl text-center">Sign up!</h2>
     <form
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
@@ -11,21 +11,11 @@
         Full Name:
       </BaseLabel>
       <BaseInput
-          :id="'fullName'"
           v-model="fullName"
           class="w-full"
+          :id="'fullName'"
+          :autocomplete="'name'"
           :touch="v$.fullName.$touch"/>
-      <!-- <BaseLabel
-          :id="'username'"
-          :error="v$.username.$error"
-          :errorMessage="v$.username.$errors[0]?.$message">
-        Username:
-      </BaseLabel>
-      <BaseInput
-          :id="'username'"
-          v-model="username"
-          class="w-full"
-          :touch="v$.username.$touch"/> -->
       <BaseLabel
           :id="'email'"
           :error="v$.email.$error"
@@ -33,9 +23,10 @@
         Email:
       </BaseLabel>
       <BaseInput
-          :id="'email'"
           v-model="email"
           class="w-full"
+          :id="'email'"
+          :autocomplete="'email'"
           :touch="v$.email.$touch"/>
       <BaseLabel
           :id="'password'"
@@ -44,12 +35,13 @@
         Password:
       </BaseLabel>
       <BaseInput
-          :id="'password'"
           v-model="password"
-          :type="'password'"
           class="w-full"
+          :type="'password'"
+          :id="'password'"
+          :autocomplete="'current-password'"
           :touch="v$.password.$touch"/>
-      <BaseButton>Sign Up</BaseButton>
+      <BaseButton class="mt-4">Sign Up</BaseButton>
     </form>
     <p v-if="signupError" class="text-red-500 text-center">{{ signupError }}</p>
   </div>
@@ -65,7 +57,6 @@ import BaseInput from "@/components/BaseInput.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
 
 const fullName = ref(null)
-const username = ref(null)
 const email = ref(null)
 const password = ref(null)
 

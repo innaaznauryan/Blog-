@@ -24,7 +24,7 @@ import PostCard from "@/components/PostCard.vue"
 
 const loading = ref(true)
 const favPosts = computed(() => {
-  return posts.value?.filter(post => post.likes.includes(loggedIn.value?.id))
+  return posts.value?.filter(post => post.likes.includes(loggedIn.value?.uid))
 })
 
 onMounted(async () => {

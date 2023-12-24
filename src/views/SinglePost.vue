@@ -15,13 +15,13 @@
             <IconHeart v-else/>
           </div>
           <BaseButton
-              v-if="singlePost?.userId === loggedIn?.id"
+              v-if="singlePost?.userId === loggedIn?.uid"
               @click="handleEditPost"
               class="w-1/2 lg:w-1/3 whitespace-nowrap">
             Edit Post
           </BaseButton>
           <BaseButton
-              v-if="singlePost?.userId === loggedIn?.id"
+              v-if="singlePost?.userId === loggedIn?.uid"
               @click="handleDeletePost"
               class="w-1/2 lg:w-1/3 whitespace-nowrap">
             Delete Post
@@ -75,7 +75,7 @@ const like = ref(false)
 const loading = ref(true)
 
 const handleLike = async() => {
-  like.value ? await deleteLike(singlePost, loggedIn) : await addLike(singlePost, loggedIn)
+  like.value ? await deleteLike(singlePost, loggedIn.value.uid) : await addLike(singlePost, loggedIn.value.uid)
   like.value = !like.value
 }
 const handleEditPost = () => {
@@ -95,7 +95,7 @@ onMounted(async() => {
   showModal.value = false
   await getSinglePost(props.id)
   if(loggedIn.value) {
-    like.value = isFav(singlePost, loggedIn)
+    like.value = isFav(singlePost, loggedIn.value.uid)
   }
   loading.value = false
 })

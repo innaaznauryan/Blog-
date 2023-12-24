@@ -3,21 +3,21 @@
     <p
         v-if="loggedIn"
         class="font-medium p-4 text-xl">
-      Welcome {{ loggedIn.fullName }}!
+      Welcome {{ loggedIn.displayName }}!
     </p>
     <p
         v-else
         class="font-medium p-4 text-xl">
       Sign In to add posts!
     </p>
-    <p class="text-lg">Lorem ipsum dolor sit amet</p>
+    <p class="text-lg p-4">Share your thoughts, ideas and adventures in our blog</p>
     <div class="text-center">
       <img
           :src=background
           alt="background"
           class="inline-block my-4 p-4">
     </div>
-    <p class="text-lg p-4">Share your thoughts, ideas, adventures in our blog!</p>
+    <p class="text-lg p-4">A directory of wonderful things</p>
   </div>
 </template>
 

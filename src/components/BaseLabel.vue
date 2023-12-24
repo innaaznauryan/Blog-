@@ -2,13 +2,13 @@
   <div class="flex flex-col w-full h-10 mt-4">
     <label
         :for="id"
-        class="text-sm w-1/3"
+        class="text-sm"
         :class="customClass">
       <slot></slot>
     </label>
     <span
         v-if="error"
-        class="text-red-500 text-sm w-2/3">
+        class="text-red-500 text-sm">
       {{ errorMessage }}
     </span>
   </div>

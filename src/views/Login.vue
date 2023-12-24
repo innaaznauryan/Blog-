@@ -1,6 +1,6 @@
 <template>
   <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
-    <h2 class="font-medium p-4 text-xl text-center">Sign in!</h2>
+    <h2 class="font-medium pt-4 text-xl text-center">Sign in!</h2>
     <form
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
@@ -14,6 +14,7 @@
           :id="'email'"
           v-model="email"
           class="w-full"
+          :autocomplete="'email'"
           :touch="v$.email.$touch"/>
       <BaseLabel
           :id="'password'"
@@ -26,8 +27,9 @@
           :type="'password'"
           v-model="password"
           class="w-full"
+          :autocomplete="'current-password'"
           :touch="v$.password.$touch"/>
-      <BaseButton>Sign In</BaseButton>
+      <BaseButton class="mt-4">Sign In</BaseButton>
     </form>
     <p v-if="loginError" class="text-red-500 text-center">{{ loginError }}</p>
   </div>

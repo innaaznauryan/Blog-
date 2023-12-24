@@ -19,7 +19,8 @@ async function getPosts() {
         })
         posts.value = data
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
 async function getSinglePost(id) {
@@ -28,21 +29,22 @@ async function getSinglePost(id) {
         if(!response.exists()) {
             throw response
         }
-        singlePost.value = response.data()
+        singlePost.value = {id: response.id, ...response.data()}
     } catch(err) {
         if(!err.exists()) {
             router.push({name: "404"})
         } else {
-            postError.value = err
+            console.log(err)
+            postError.value = "Something went wrong"
         }
     }
 }
 async function createPost(title, summary, content) {
     try {
         const newPost = {
-            userId: loggedIn.value.id,
+            userId: loggedIn.value.uid,
             title: format(title.value),
-            user: loggedIn.value.fullName,
+            user: loggedIn.value.displayName,
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
             summary: format(summary.value),
             content: format(content.value),
@@ -50,9 +52,10 @@ async function createPost(title, summary, content) {
             likes: []
         }
         const response = await firestore.CREATE_POST(newPost)
-        posts.value.push(response.data)
+        posts.value.push({id: response.id, ...newPost})
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
 async function editPost(post, title, summary, content) {
@@ -62,29 +65,32 @@ async function editPost(post, title, summary, content) {
         post.content = format(content.value)
         await firestore.UPDATE_POST(post)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
 async function deletePost(id) {
     try {
         await firestore.DELETE_POST(id)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
 async function addComment(post, comment, loggedIn) {
     try {
         post.value.comments.unshift({
             id: uuidv4(),
-            userId: loggedIn.value.id,
-            user: loggedIn.value.fullName,
+            userId: loggedIn.value.uid,
+            user: loggedIn.value.displayName,
             email: loggedIn.value.email,
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
             content: comment.value.trim()
         })
         await firestore.UPDATE_POST(post.value)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
 async function deleteComment(commentId, post) {
@@ -93,27 +99,30 @@ async function deleteComment(commentId, post) {
         post.value = {...post.value, comments}
         await firestore.UPDATE_POST(post.value)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
-async function addLike(post, loggedIn) {
+async function addLike(post, uid) {
     try {
-        post.value.likes.push(loggedIn.value.id)
+        post.value.likes.push(uid)
         await firestore.UPDATE_POST(post.value)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
-async function deleteLike(post, loggedIn) {
+async function deleteLike(post, uid) {
     try {
-        post.value = {...post.value, likes: post.value.likes.filter(id => id !== loggedIn.value.id)}
+        post.value = {...post.value, likes: post.value.likes.filter(id => id !== uid)}
         await firestore.UPDATE_POST(post.value)
     } catch(err) {
-        postError.value = err
+        console.log(err)
+        postError.value = "Something went wrong"
     }
 }
-function isFav(post, loggedIn) {
-    return post.value?.likes.includes(loggedIn.value.id)
+function isFav(post, uid) {
+    return post.value?.likes.includes(uid)
 }
 function format(string) {
     return string.trim()[0].toUpperCase() + string.trim().slice(1)

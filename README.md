@@ -12,7 +12,6 @@
 - Vue Router
 - Vuelidate
 - Firebase
-- Axios for HTTP Requests
 
 ### Project setup
 

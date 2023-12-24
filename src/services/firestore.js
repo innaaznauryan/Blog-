@@ -5,7 +5,8 @@ import { getFirestore,
     doc, 
     getDoc,
     addDoc,
-    updateDoc
+    updateDoc,
+    deleteDoc
 } from "firebase/firestore"
 import {
     getAuth, 
@@ -29,9 +30,8 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth()
 const postsCollection = collection(db, "posts")
-const activeUserCollection = collection(db, "active")
 
-export { auth, onAuthStateChanged, updateProfile }
+export { auth, onAuthStateChanged }
 
 export default {
     GET_POSTS() {
@@ -44,26 +44,24 @@ export default {
     SIGNUP(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
     },
-    UPDATE_USER(userId, fullName) {
-        return updateDoc(activeUserCollection, {userId, fullName})
+    UPDATE_PROFILE(user, options) {
+        return updateProfile(user, options)
     },
-    GET_USER() {
-        return getDocs(activeUserCollection)
-    },
-    LOGIN({email, password}) {
+    LOGIN(email, password) {
         return signInWithEmailAndPassword(auth, email, password)
     },
     LOGOUT() {
         return signOut(auth)
     },
-    // CREATE_POST({userId, title, user, date, summary, content, comments, likes}) {
-        // return addDoc(postsCollection, {userId, title, user, date, summary, content, comments, likes})
-        // return apiClient.post("/posts", {id, userId, title, user, date, summary, content, comments, likes})
-    // },
-    // UPDATE_POST({id, userId, title, user, date, summary, content, comments, likes}) {
-    //     return apiClient.put("/posts/" + id, {id, userId, title, user, date, summary, content, comments, likes})
-    // },
-    // DELETE_POST(id) {
-    //     return apiClient.delete("/posts/" + id)
-    // }
+    CREATE_POST(post) {
+        return addDoc(postsCollection, post)
+    },
+    UPDATE_POST(post) {
+        const postRef = doc(db, "posts", post.id)
+        return updateDoc(postRef, post)
+    },
+    DELETE_POST(id) {
+        const postRef = doc(db, "posts", id)
+        return deleteDoc(postRef)
+    }
 }

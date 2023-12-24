@@ -49,7 +49,7 @@
 import { ref, onMounted } from "vue"
 import { loggedIn, logout } from "@/composable/useUsers"
 import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
-import {onAuthStateChanged, auth} from "@/services/firestore.js"
+import { onAuthStateChanged, auth } from "@/services/firestore.js"
 
 const loading = ref(true)
 
@@ -62,9 +62,9 @@ const handleClick = () => {
   )
 }
 
-onMounted(() => {
+onMounted(async() => {
   onAuthStateChanged(auth, (user) => {
-    loggedIn.value = user ? {id: user.uid, email: user.email} : null
+    loggedIn.value = user
   })
   loading.value = false
 })
