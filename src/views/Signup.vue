@@ -43,7 +43,9 @@
           :touch="v$.password.$touch"/>
       <BaseButton class="mt-4">Sign Up</BaseButton>
     </form>
-    <p v-if="signupError" class="text-red-500 text-center">{{ signupError }}</p>
+    <p class="text-red-500 text-center h-6">
+      <span v-if="signupError">{{ signupError }}</span>
+    </p>
   </div>
 </template>
 

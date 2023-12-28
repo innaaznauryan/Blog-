@@ -70,7 +70,7 @@ onMounted(async() => {
 <style scopped>
 .fade-enter-active,
 .fade-leave-active{
-  transition: .5s;
+  transition: .25s;
 }
 .fade-enter-from,
 .fade-leave-to{

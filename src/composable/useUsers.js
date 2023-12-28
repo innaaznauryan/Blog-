@@ -9,7 +9,8 @@ const loggedIn = ref(auth.currentUser)
 async function signUp(email, password, fullName) {
     try {
         const cred = await firestore.SIGNUP(email.value, password.value, fullName.value)
-        await firestore.UPDATE_PROFILE(cred.user, {displayName: fullName.value})
+        const response = await firestore.UPDATE_PROFILE(cred.user, {displayName: fullName.value})
+        console.log(response)
         router.push({name: "home"})
     } catch(err) {
         if(err.message.includes("already-in-use")) {
@@ -23,10 +24,11 @@ async function signUp(email, password, fullName) {
 
 async function login(email, password) {
     try {
-        await firestore.LOGIN(email.value, password.value)
+        const response = await firestore.LOGIN(email.value, password.value)
+        console.log(response)
         router.push({name: "home"})
     } catch(err) {
-        if(err.message.includes("missing")) {
+        if(err.message.includes("invalid")) {
             loginError.value = "Wrong email and/or password"
             console.log(err)
         } else {
