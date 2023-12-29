@@ -38,7 +38,8 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
+import { computed, ref } from "vue"
+import router from "@/router"
 import { login, loginError } from "@/composable/useUsers"
 import { required, email as mail } from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"

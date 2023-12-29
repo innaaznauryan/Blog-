@@ -9,7 +9,7 @@
         <div class="flex items-center justify-start sm:justify-center my-4">
           <label
               :for="'search'"
-              class="cursor-pointer hover:text-orange-300 duration-500 ml-4 sm:ml-0">
+              class="cursor-pointer hover:text-[#618926] duration-500 ml-4 sm:ml-0">
             <IconSearch/>
           </label>
           <BaseInput
@@ -20,7 +20,7 @@
           <BaseButton
               v-if="loggedIn"
               @click="handleClick"
-              class="fixed border-2 shadow-lg mr-3 md:mr-10"
+              class="fixed shadow-lg mr-3 md:mr-10"
               :style="{ right: 0 }">
             Create Post
           </BaseButton>
@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue"
-import { posts, getPosts, showModal, postError, getSinglePost } from "@/composable/usePosts"
+import { posts, getPosts, showModal, postError } from "@/composable/usePosts"
 import { loggedIn } from "@/composable/useUsers"
 import { IconSearch } from "@tabler/icons-vue"
 import CreatePost from "@/components/CreatePost.vue"

@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-orange-50 text-stone-900 px-8 py-2 rounded-lg left-1/2"
+      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-[#ddd] text-stone-900 px-8 py-2 rounded-lg left-1/2"
       :style="{ top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
     <form class="flex flex-col gap-1" @submit.prevent="submitPost">

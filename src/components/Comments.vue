@@ -18,12 +18,15 @@
       </div>
     </div>
     <div class="self-start text-left mb-4" v-for="comment in singlePost.comments" :key="comment.id">
-      <p class="bg-orange-300 rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
-      <IconTrash
+      <div class="flex items-center gap-2">
+        <p class="bg-[#618926] rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
+        <IconTrash
           v-if="singlePost.userId === loggedIn?.uid || comment.userId === loggedIn?.uid"
           size="20"
           @click="handleDeleteComment(comment.id)"
-          class="cursor-pointer inline-block hover:text-orange-300 duration-500 ml-2"/>
+          class="cursor-pointer hover:text-[#618926] duration-500"
+        />
+      </div>
       <p class=" m-2 italic">{{ comment.date }}</p>
       <p class="py-2 px-4 bg-white rounded-2xl w-fit inline-block">{{ comment.content }}</p>
     </div>
@@ -48,7 +51,7 @@ import {
 import { loggedIn } from "@/composable/useUsers"
 import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
 import { IconTrash } from "@tabler/icons-vue"
-import background from "../assets/image/comments.jpg"
+import background from "../assets/image/cover.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
 

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+import { onAuthStateChanged, auth } from "@/services/firestore.js"
 import Home from "@/views/Home.vue"
 
 const routes = [
@@ -26,12 +27,30 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/Login.vue")
+    component: () => import("../views/Login.vue"),
+    beforeEnter: ((to, from, next) => {
+      onAuthStateChanged(auth, user => {
+        if(user) {
+          next({name: "home"})
+        } else {
+          next()
+        }
+      })
+    })
   },
   {
     path: "/signup",
     name: "signup",
-    component: () => import("../views/Signup.vue")
+    component: () => import("../views/Signup.vue"),
+    beforeEnter: ((to, from, next) => {
+      onAuthStateChanged(auth, user => {
+        if(user) {
+          next({name: "home"})
+        } else {
+          next()
+        }
+      })
+    })
   },
   {
     path: "/:catchAll*",
