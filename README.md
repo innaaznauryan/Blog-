@@ -13,6 +13,8 @@
 - Vuelidate
 - Firebase
 
+Check out a live demo [here](https://blog-45ec7.web.app/)!
+
 ### Project setup
 
 In the root directory:
