@@ -13,7 +13,7 @@
 - Vuelidate
 - Firebase
 
-Check out a live demo [here](https://blog-45ec7.web.app/)!
+Check out a live demo [here](https://blogging-platform-de857.web.app/)!
 
 ### Project setup
 
