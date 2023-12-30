@@ -4,7 +4,7 @@
       :value="modelValue"
       rows="8"
       @input="handleInput"
-      class="p-2 rounded-lg resize-none shadow-md">
+      class="p-2 resize-none shadow-md">
   </textarea>
 </template>
 

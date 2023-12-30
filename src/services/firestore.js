@@ -18,13 +18,13 @@ import {
 } from "firebase/auth"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBA4Ct9cVn7IWJe7UJdIw-VtvK4e9l8-tM",
-    authDomain: "blog-45ec7.firebaseapp.com",
-    projectId: "blog-45ec7",
-    storageBucket: "blog-45ec7.appspot.com",
-    messagingSenderId: "552457788951",
-    appId: "1:552457788951:web:8bd9c0a59fa0484423c652"
-};
+  apiKey: "AIzaSyDF6YAHq5KBmDLTITQxL_o0ZJRInO3G3us",
+  authDomain: "blogging-platform-de857.firebaseapp.com",
+  projectId: "blogging-platform-de857",
+  storageBucket: "blogging-platform-de857.appspot.com",
+  messagingSenderId: "180759922893",
+  appId: "1:180759922893:web:2cb019abc4430868168184"
+}
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)

@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-[#ddd] text-stone-900 px-8 py-2 rounded-lg left-1/2"
+      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-[#ddd] text-stone-900 px-8 py-2 left-1/2"
       :style="{ top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
     <form class="flex flex-col gap-1" @submit.prevent="submitPost">
@@ -9,7 +9,7 @@
           :id="'title'"
           :error="v$.title.$error"
           :errorMessage="v$.title.$errors[0]?.$message"
-          :customClass="{'font-medium': true }">
+          :customClass="{'font-medium': true}">
         Title
       </BaseLabel>
       <BaseInput
@@ -38,7 +38,7 @@
           :id="'content'"
           v-model="content"
           @blur="v$.content.$touch()"/>
-      <div class="flex gap-2 justify-center pt-4">
+      <div class="flex gap-4 justify-center pt-4">
         <BaseButton
             :type="'submit'">
           Publish

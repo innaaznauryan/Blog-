@@ -6,7 +6,7 @@
       :autocomplete="autocomplete"
       @blur="touch"
       @input="handleInput"
-      class="p-2 rounded-lg shadow-md"/>
+      class="p-2 shadow-md"/>
 </template>
 
 <script setup>
