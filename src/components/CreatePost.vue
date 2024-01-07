@@ -17,17 +17,6 @@
           v-model="title"
           @blur="v$.title.$touch()"/>
       <BaseLabel
-          :id="'summary'"
-          :error="v$.summary.$error"
-          :errorMessage="v$.summary.$errors[0]?.$message"
-          :customClass="{'font-medium': true }">
-        Summary
-      </BaseLabel>
-      <BaseInput
-          :id="'summary'"
-          v-model="summary"
-          @blur="v$.summary.$touch()"/>
-      <BaseLabel
           :id="'content'"
           :error="v$.content.$error"
           :errorMessage="v$.content.$errors[0]?.$message"
@@ -72,7 +61,6 @@ const props = defineProps({
 
 const scrollTop = ref(null)
 const title = ref(props.post?.title || null)
-const summary = ref(props.post?.summary || null)
 const content = ref(props.post?.content || null)
 const formError = ref(false)
 
@@ -83,19 +71,14 @@ const rules = computed(() => {
       minLength: minLength(5),
       maxLength: maxLength(50)
     },
-    summary: {
-      required,
-      minLength: minLength(10),
-      maxLength: maxLength(100)
-    },
     content: {
       required,
       minLength: minLength(20),
-      maxLength: maxLength(2000)
+      maxLength: maxLength(10000)
     }
   }
 })
-const v$ = useValidate(rules, {title, summary, content})
+const v$ = useValidate(rules, {title, content})
 const submitPost = async() => {
   await v$.value.$validate()
   if(v$.value.$error) {
@@ -104,7 +87,7 @@ const submitPost = async() => {
       formError.value = false
     }, 3000)
   } else {
-    props.post ? await editPost(props.post, title, summary, content) : await createPost(title, summary, content)
+    props.post ? await editPost(props.post, title, content) : await createPost(title, content)
     showModal.value = false
   }
 }

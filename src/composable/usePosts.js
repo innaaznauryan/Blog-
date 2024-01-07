@@ -39,14 +39,13 @@ async function getSinglePost(id) {
         }
     }
 }
-async function createPost(title, summary, content) {
+async function createPost(title, content) {
     try {
         const newPost = {
             userId: loggedIn.value.uid,
             title: format(title.value),
             user: loggedIn.value.displayName,
             date: new Date().toLocaleString("en-US", {hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric"}),
-            summary: format(summary.value),
             content: format(content.value),
             comments: [],
             likes: []
@@ -58,10 +57,9 @@ async function createPost(title, summary, content) {
         postError.value = "Something went wrong"
     }
 }
-async function editPost(post, title, summary, content) {
+async function editPost(post, title, content) {
     try {
         post.title = format(title.value)
-        post.summary = format(summary.value)
         post.content = format(content.value)
         await firestore.UPDATE_POST(post)
     } catch(err) {
