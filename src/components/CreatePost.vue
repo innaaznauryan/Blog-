@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 w-full h-screen"></div>
   <div
-      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-[#ddd] text-stone-900 px-8 py-2 left-1/2"
+      class="absolute z-50 transform -translate-x-1/2 w-full sm:w-3/4 lg:w-1/2 bg-[#f2f7f2] text-stone-900 px-8 py-2 left-1/2"
       :style="{ top: scrollTop + 30 + 'px' }">
     <h2 class="text-xl font-medium text-center p-2">{{ post ? "Edit your post" : "Create a post" }}</h2>
     <form class="flex flex-col gap-1" @submit.prevent="submitPost">
@@ -48,15 +48,15 @@
 <script setup>
 import {ref, computed, onMounted} from "vue"
 import useValidate from "@vuelidate/core"
-import { required, minLength, maxLength } from "@vuelidate/validators"
-import { createPost, editPost, showModal } from "@/composable/usePosts"
+import {required, minLength, maxLength} from "@vuelidate/validators"
+import {createPost, editPost, showModal} from "@/composable/usePosts"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseTextarea from "@/components/BaseTextarea.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
 
 const props = defineProps({
-  post: { type: Object, default: null }
+  post: {type: Object, default: null}
 })
 
 const scrollTop = ref(null)
@@ -79,9 +79,9 @@ const rules = computed(() => {
   }
 })
 const v$ = useValidate(rules, {title, content})
-const submitPost = async() => {
+const submitPost = async () => {
   await v$.value.$validate()
-  if(v$.value.$error) {
+  if (v$.value.$error) {
     formError.value = true
     setTimeout(() => {
       formError.value = false
@@ -98,7 +98,3 @@ onMounted(() => {
   scrollTop.value = window.scrollY
 })
 </script>
-
-<style scoped>
-
-</style>

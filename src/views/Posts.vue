@@ -8,14 +8,14 @@
       <div v-else>
         <div class="flex items-center justify-start sm:justify-center my-4">
           <label
-              :for="'search'"
-              class="cursor-pointer hover:text-[#618926] duration-500 ml-4 sm:ml-0">
+              for="search"
+              class="cursor-pointer ml-4 sm:ml-0">
             <IconSearch/>
           </label>
           <BaseInput
               v-model="search"
-              :id="'search'"
-              :placeholder="'Search'"
+              id="search"
+              placeholder="Search"
               class="w-1/2 lg:w-1/3 xl:w-1/4 m-2"/>
           <BaseButton
               v-if="loggedIn"
@@ -42,10 +42,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue"
-import { posts, getPosts, showModal, postError } from "@/composable/usePosts"
-import { loggedIn } from "@/composable/useUsers"
-import { IconSearch } from "@tabler/icons-vue"
+import {ref, computed, onMounted} from "vue"
+import {posts, getPosts, showModal, postError} from "@/composable/usePosts"
+import {loggedIn} from "@/composable/useUsers"
+import {IconSearch} from "@tabler/icons-vue"
 import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
 import PostCard from "@/components/PostCard.vue"
@@ -61,7 +61,7 @@ const handleClick = () => {
   showModal.value = true
   search.value = null
 }
-onMounted(async() => {
+onMounted(async () => {
   await getPosts()
   loading.value = false
 })
@@ -69,11 +69,12 @@ onMounted(async() => {
 
 <style scopped>
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active {
   transition: .25s;
 }
+
 .fade-enter-from,
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
 }
 </style>

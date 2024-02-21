@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import {ref, onMounted} from "vue"
 import router from "@/router"
 import {
   singlePost,
@@ -63,9 +63,9 @@ import {
   deleteLike,
   isFav
 } from "@/composable/usePosts"
-import { loggedIn } from "@/composable/useUsers"
-import { IconHeart, IconHeartFilled } from "@tabler/icons-vue"
-import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
+import {loggedIn} from "@/composable/useUsers"
+import {IconHeart, IconHeartFilled} from "@tabler/icons-vue"
+import {useConfirmBeforeAction} from "@/composable/useConfirmBeforeAction"
 import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
 import Comments from "@/components/Comments.vue"
@@ -76,7 +76,7 @@ const props = defineProps({
 const like = ref(false)
 const loading = ref(true)
 
-const handleLike = async() => {
+const handleLike = async () => {
   like.value ? await deleteLike(singlePost, loggedIn.value.uid) : await addLike(singlePost, loggedIn.value.uid)
   like.value = !like.value
 }
@@ -85,7 +85,7 @@ const handleEditPost = () => {
 }
 const handleDeletePost = () => {
   useConfirmBeforeAction(
-      async() => {
+      async () => {
         await deletePost(props.id)
         await router.push({name: "posts"})
       },
@@ -93,10 +93,10 @@ const handleDeletePost = () => {
   )
 }
 
-onMounted(async() => {
+onMounted(async () => {
   showModal.value = false
   await getSinglePost(props.id)
-  if(loggedIn.value) {
+  if (loggedIn.value) {
     like.value = isFav(singlePost, loggedIn.value.uid)
   }
   loading.value = false
@@ -105,11 +105,12 @@ onMounted(async() => {
 
 <style scoped>
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active {
   transition: .25s;
 }
+
 .fade-enter-from,
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
 }
 </style>

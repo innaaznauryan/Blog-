@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full h-10 mt-4">
     <label
-        :for="id"
+        v-bind="$attrs"
         class="text-sm"
         :class="customClass">
       <slot></slot>
@@ -16,13 +16,8 @@
 
 <script setup>
 defineProps({
-  id: { type: String, default: null },
-  error: { type: Boolean, default: null },
-  errorMessage: { type: String, default: null },
-  customClass: { type: Object, default: null }
+  error: {type: Boolean, default: null},
+  errorMessage: {type: String, default: null},
+  customClass: {type: Object, default: null}
 })
 </script>
-
-<style scoped>
-
-</style>

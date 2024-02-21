@@ -5,29 +5,29 @@
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
       <BaseLabel
-          :id="'email'"
+          for="email"
           :error="v$.email.$error"
           :errorMessage="v$.email.$errors[0]?.$message">
         Email:
       </BaseLabel>
       <BaseInput
-          :id="'email'"
+          id="email"
           v-model="email"
           class="w-full"
-          :autocomplete="'email'"
+          autocomplete="email"
           :touch="v$.email.$touch"/>
       <BaseLabel
-          :id="'password'"
+          for="password"
           :error="v$.password.$error"
           :errorMessage="v$.password.$errors[0]?.$message">
         Password:
       </BaseLabel>
       <BaseInput
-          :id="'password'"
+          id="password"
           :type="'password'"
           v-model="password"
           class="w-full"
-          :autocomplete="'current-password'"
+          autocomplete="current-password"
           :touch="v$.password.$touch"/>
       <BaseButton class="mt-4">Sign In</BaseButton>
     </form>
@@ -38,10 +38,10 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue"
+import {computed, ref} from "vue"
 import router from "@/router"
-import { login, loginError } from "@/composable/useUsers"
-import { required, email as mail } from "@vuelidate/validators"
+import {login, loginError} from "@/composable/useUsers"
+import {required, email as mail} from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
@@ -52,17 +52,17 @@ const password = ref(null)
 
 const rules = computed(() => {
   return {
-    email: { required, mail },
-    password: { required }
+    email: {required, mail},
+    password: {required}
   }
 })
 const v$ = useValidate(rules, {email, password})
 
-const handleSubmit = async() => {
+const handleSubmit = async () => {
   await v$.value.$validate()
-  if(!v$.value.$error) {
+  if (!v$.value.$error) {
     await login(email, password)
-    if(loginError) {
+    if (loginError) {
       setTimeout(() => {
         loginError.value = null
       }, 3000)
@@ -70,7 +70,3 @@ const handleSubmit = async() => {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

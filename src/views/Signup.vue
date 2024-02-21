@@ -5,7 +5,7 @@
         @submit.prevent="handleSubmit"
         class="flex flex-col gap-2 items-center">
       <BaseLabel
-          :id="'fullName'"
+          for="fullName"
           :error="v$.fullName.$error"
           :errorMessage="v$.fullName.$errors[0]?.$message">
         Full Name:
@@ -13,11 +13,11 @@
       <BaseInput
           v-model="fullName"
           class="w-full"
-          :id="'fullName'"
-          :autocomplete="'name'"
+          id="fullName"
+          autocomplete="name"
           :touch="v$.fullName.$touch"/>
       <BaseLabel
-          :id="'email'"
+          for="email"
           :error="v$.email.$error"
           :errorMessage="v$.email.$errors[0]?.$message">
         Email:
@@ -25,11 +25,11 @@
       <BaseInput
           v-model="email"
           class="w-full"
-          :id="'email'"
-          :autocomplete="'email'"
+          id="email"
+          autocomplete="email"
           :touch="v$.email.$touch"/>
       <BaseLabel
-          :id="'password'"
+          for="password"
           :error="v$.password.$error"
           :errorMessage="v$.password.$errors[0]?.$message">
         Password:
@@ -38,8 +38,8 @@
           v-model="password"
           class="w-full"
           :type="'password'"
-          :id="'password'"
-          :autocomplete="'current-password'"
+          id="password"
+          autocomplete="current-password"
           :touch="v$.password.$touch"/>
       <BaseButton class="mt-4">Sign Up</BaseButton>
     </form>
@@ -50,10 +50,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
+import {computed, onMounted, ref} from "vue"
 import useValidate from "@vuelidate/core"
-import { helpers, required, minLength, email as mail } from "@vuelidate/validators"
-import { signUp, signupError } from "@/composable/useUsers"
+import {helpers, required, minLength, email as mail} from "@vuelidate/validators"
+import {signUp, signupError} from "@/composable/useUsers"
 import BaseButton from "@/components/BaseButton.vue"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseLabel from "@/components/BaseLabel.vue"
@@ -64,8 +64,8 @@ const password = ref(null)
 
 const rules = computed(() => {
   return {
-    fullName: { required, minLength: minLength(6) },
-    email: { required, mail },
+    fullName: {required, minLength: minLength(6)},
+    email: {required, mail},
     password: {
       required,
       minLength: minLength(6),
@@ -78,14 +78,14 @@ const rules = computed(() => {
 })
 const v$ = useValidate(rules, {fullName, email, password})
 
-onMounted(async() => {
+onMounted(async () => {
   signupError.value = null
 })
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   await v$.value.$validate()
-  if(!v$.value.$error) {
+  if (!v$.value.$error) {
     await signUp(email, password, fullName)
-    if(signupError) {
+    if (signupError) {
       setTimeout(() => {
         signupError.value = null
       }, 3000)
@@ -93,7 +93,3 @@ const handleSubmit = async(e) => {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

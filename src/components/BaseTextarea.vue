@@ -10,8 +10,8 @@
 
 <script setup>
 defineProps({
-  modelValue: { type: String, default: null },
-  id: { type: String, default: null }
+  modelValue: {type: String, default: null},
+  id: {type: String, default: null}
 })
 const emit = defineEmits(["update:modelValue"])
 
@@ -19,7 +19,3 @@ const handleInput = (e) => {
   emit("update:modelValue", e.target.value)
 }
 </script>
-
-<style scoped>
-
-</style>

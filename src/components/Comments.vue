@@ -19,12 +19,12 @@
     </div>
     <div class="self-start text-left mb-4" v-for="comment in singlePost.comments" :key="comment.id">
       <div class="flex items-center gap-2">
-        <p class="bg-[#618926] rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
+        <p class="bg-[#b2f6b2] rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
         <IconTrash
-          v-if="singlePost.userId === loggedIn?.uid || comment.userId === loggedIn?.uid"
-          size="20"
-          @click="handleDeleteComment(comment.id)"
-          class="cursor-pointer hover:text-[#618926] duration-500"
+            v-if="singlePost.userId === loggedIn?.uid || comment.userId === loggedIn?.uid"
+            size="20"
+            @click="handleDeleteComment(comment.id)"
+            class="cursor-pointer"
         />
       </div>
       <p class=" m-2 italic">{{ comment.date }}</p>
@@ -38,8 +38,8 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
-import { required } from "@vuelidate/validators"
+import {computed, onMounted, ref} from "vue"
+import {required} from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import {
   singlePost,
@@ -48,9 +48,9 @@ import {
   deleteComment,
   commentError
 } from "@/composable/usePosts"
-import { loggedIn } from "@/composable/useUsers"
-import { useConfirmBeforeAction } from "@/composable/useConfirmBeforeAction"
-import { IconTrash } from "@tabler/icons-vue"
+import {loggedIn} from "@/composable/useUsers"
+import {useConfirmBeforeAction} from "@/composable/useConfirmBeforeAction"
+import {IconTrash} from "@tabler/icons-vue"
 import background from "../assets/image/cover.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
@@ -62,14 +62,14 @@ const comment = ref(null)
 
 const rules = computed(() => {
   return {
-    comment: { required }
+    comment: {required}
   }
 })
 const v$ = useValidate(rules, {comment})
 
-const handleAddComment = async(e) => {
+const handleAddComment = async (e) => {
   await v$.value.$validate()
-  if(v$.value.$error) {
+  if (v$.value.$error) {
     commentError.value = "Please fill the comment"
     setTimeout(() => {
       commentError.value = null
@@ -82,18 +82,14 @@ const handleAddComment = async(e) => {
 }
 const handleDeleteComment = (commentId) => {
   useConfirmBeforeAction(
-      async() => {
+      async () => {
         await deleteComment(commentId, singlePost)
       },
       {text: "Are you sure you want to delete this comment?"}
   )
 }
-onMounted(async() => {
+onMounted(async () => {
   await getSinglePost(props.id)
   commentError.value = false
 })
 </script>
-
-<style scoped>
-
-</style>

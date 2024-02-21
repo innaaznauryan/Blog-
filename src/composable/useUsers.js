@@ -1,4 +1,4 @@
-import { ref } from "vue"
+import {ref} from "vue"
 import router from "@/router"
 import firestore, {auth} from "@/services/firestore"
 
@@ -11,8 +11,8 @@ async function signUp(email, password, fullName) {
         const cred = await firestore.SIGNUP(email.value, password.value, fullName.value)
         await firestore.UPDATE_PROFILE(cred.user, {displayName: fullName.value})
         router.push({name: "home"})
-    } catch(err) {
-        if(err.message.includes("already-in-use")) {
+    } catch (err) {
+        if (err.message.includes("already-in-use")) {
             signupError.value = "This user is already registered"
         } else {
             signupError.value = "Something went wrong"
@@ -25,8 +25,8 @@ async function login(email, password) {
     try {
         await firestore.LOGIN(email.value, password.value)
         router.push({name: "home"})
-    } catch(err) {
-        if(err.message.includes("invalid")) {
+    } catch (err) {
+        if (err.message.includes("invalid")) {
             loginError.value = "Wrong email and/or password"
             console.log(err)
         } else {
@@ -40,7 +40,7 @@ async function logout() {
     try {
         await firestore.LOGOUT()
         router.push({name: "home"})
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 }

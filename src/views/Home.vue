@@ -22,10 +22,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
-import { loggedIn } from "@/composable/useUsers"
+import {onMounted, ref} from "vue"
+import {loggedIn} from "@/composable/useUsers"
 import background from "../assets/image/background.jpg"
-import { onAuthStateChanged, auth } from "@/services/firestore.js"
+import {onAuthStateChanged, auth} from "@/services/firestore.js"
 
 const loading = ref(true)
 
@@ -37,7 +37,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style scoped>
-
-</style>

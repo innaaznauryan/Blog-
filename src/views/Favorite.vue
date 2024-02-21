@@ -17,9 +17,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue"
-import { loggedIn } from "@/composable/useUsers"
-import { posts, getPosts, postError } from "@/composable/usePosts"
+import {ref, onMounted, computed} from "vue"
+import {loggedIn} from "@/composable/useUsers"
+import {posts, getPosts, postError} from "@/composable/usePosts"
 import PostCard from "@/components/PostCard.vue"
 
 const loading = ref(true)
@@ -35,11 +35,12 @@ onMounted(async () => {
 
 <style scoped>
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active {
   transition: .25s;
 }
+
 .fade-enter-from,
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
 }
 </style>
