@@ -29,7 +29,7 @@
             Delete Post
           </BaseButton>
           <p class="font-medium text-lg">{{ singlePost?.summary }}</p>
-          <pre class="text-left whitespace-pre-wrap font-sans">{{ singlePost?.content }}</pre>
+          <pre class="text-left whitespace-pre-wrap">{{ singlePost?.content }}</pre>
         </div>
         <div class="w-full sm:w-1/2">
           <Comments :id="id"/>

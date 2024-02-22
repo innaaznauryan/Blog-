@@ -51,7 +51,7 @@ import {
 import {loggedIn} from "@/composable/useUsers"
 import {useConfirmBeforeAction} from "@/composable/useConfirmBeforeAction"
 import {IconTrash} from "@tabler/icons-vue"
-import background from "../assets/image/cover.jpg"
+import background from "@/assets/images/cover.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
 

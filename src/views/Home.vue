@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading" class="pt-20 text-stone-900 font-sans text-center">
+  <div v-if="!loading" class="pt-20 text-stone-900 text-center">
     <p
         v-if="loggedIn"
         class="font-medium p-4 text-xl">
@@ -24,7 +24,7 @@
 <script setup>
 import {onMounted, ref} from "vue"
 import {loggedIn} from "@/composable/useUsers"
-import background from "../assets/image/background.jpg"
+import background from "@/assets/images/background.jpg"
 import {onAuthStateChanged, auth} from "@/services/firestore.js"
 
 const loading = ref(true)
@@ -35,5 +35,4 @@ onMounted(() => {
     loading.value = false
   })
 })
-
 </script>

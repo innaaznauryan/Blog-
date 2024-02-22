@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[70px] m-auto text-stone-900 font-sans w-3/4 md:w-1/2 xl:w-1/4">
+  <div class="pt-[70px] m-auto text-stone-900 w-3/4 md:w-1/2 xl:w-1/4">
     <h2 class="font-medium pt-4 text-xl text-center">Sign in!</h2>
     <form
         @submit.prevent="handleSubmit"

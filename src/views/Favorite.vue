@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[70px] text-stone-900 font-sans text-center">
+  <div class="pt-[70px] text-stone-900 text-center">
     <div v-if="postError" class="text-red-500">{{ postError }}</div>
     <transition v-else name="fade" mode="out-in">
       <div v-if="loading">
