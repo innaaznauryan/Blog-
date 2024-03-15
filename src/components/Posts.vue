@@ -1,11 +1,5 @@
 <template>
-  <div class="pt-[70px] text-stone-900 text-center">
-    <div v-if="postError" class="text-red-500">{{ postError }}</div>
-    <transition v-else name="fade" mode="out-in">
-      <div v-if="loading">
-        <p class="text-lg font-medium p-2">Loading...</p>
-      </div>
-      <div v-else>
+    <div>
         <div class="flex items-center justify-start sm:justify-center my-4">
           <label
               for="search"
@@ -32,26 +26,17 @@
           <PostCard v-for="post in posts" :post="post" :key="post.id"/>
         </div>
       </div>
-    </transition>
-    <teleport
-        to="#modal"
-        :disabled="!showModal">
-      <CreatePost v-if="loggedIn && showModal"/>
-    </teleport>
-  </div>
 </template>
 
 <script setup>
-import {ref, computed, onMounted} from "vue"
-import {posts, getPosts, showModal, postError} from "@/composable/usePosts"
+import {ref, computed} from "vue"
+import {posts, getPosts, showModal} from "@/composable/usePosts"
 import {loggedIn} from "@/composable/useUsers"
 import {IconSearch} from "@tabler/icons-vue"
-import CreatePost from "@/components/CreatePost.vue"
 import BaseButton from "@/components/BaseButton.vue"
 import PostCard from "@/components/PostCard.vue"
 import BaseInput from "@/components/BaseInput.vue"
 
-const loading = ref(true)
 const search = ref(null)
 const filteredPosts = computed(() => {
   return posts.value.filter(post => new RegExp(search.value, "i").test(post.title))
@@ -61,20 +46,6 @@ const handleClick = () => {
   showModal.value = true
   search.value = null
 }
-onMounted(async () => {
-  await getPosts()
-  loading.value = false
-})
+
+await getPosts()
 </script>
-
-<style scopped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: .25s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

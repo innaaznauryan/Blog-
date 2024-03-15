@@ -1,33 +1,34 @@
 import {createRouter, createWebHistory} from "vue-router"
 import {onAuthStateChanged, auth} from "@/services/firestore.js"
-import Home from "@/views/Home.vue"
+import Home from "@/views/HomeView.vue"
 
 const routes = [
     {
         path: "/",
         name: "home",
-        component: Home
+        component: Home,
+        alias: "/home"
     },
     {
         path: "/posts",
         name: "posts",
-        component: () => import("../views/Posts.vue")
+        component: () => import("../views/PostsView.vue")
     },
     {
         path: "/fav",
         name: "fav",
-        component: () => import("../views/Favorite.vue")
+        component: () => import("../views/FavoriteView.vue")
     },
     {
         path: "/post/:id",
         name: "single-post",
         props: true,
-        component: () => import("../views/SinglePost.vue")
+        component: () => import("../views/SinglePostView.vue")
     },
     {
         path: "/login",
         name: "login",
-        component: () => import("../views/Login.vue"),
+        component: () => import("../views/LoginView.vue"),
         beforeEnter: ((to, from, next) => {
             onAuthStateChanged(auth, user => {
                 if (user) {
@@ -41,7 +42,7 @@ const routes = [
     {
         path: "/signup",
         name: "signup",
-        component: () => import("../views/Signup.vue"),
+        component: () => import("../views/SignupView.vue"),
         beforeEnter: ((to, from, next) => {
             onAuthStateChanged(auth, user => {
                 if (user) {
@@ -51,6 +52,10 @@ const routes = [
                 }
             })
         })
+    },
+    {
+        path: "/favorite",
+        redirect: {name: "fav"}
     },
     {
         path: "/:catchAll*",

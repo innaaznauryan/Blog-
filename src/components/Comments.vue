@@ -17,7 +17,7 @@
         <p v-if="commentError" class="text-red-500">{{ commentError }}</p>
       </div>
     </div>
-    <div class="self-start text-left mb-4" v-for="comment in singlePost.comments" :key="comment.id">
+    <div class="self-start text-left mb-4" v-for="comment in singlePost?.comments || []" :key="comment.id">
       <div class="flex items-center gap-2">
         <p class="bg-[#b2f6b2] rounded-2xl w-fit inline-block px-4 py-1">{{ comment.user }}</p>
         <IconTrash

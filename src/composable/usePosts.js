@@ -9,6 +9,9 @@ const singlePost = ref(null)
 const postError = ref(null)
 const commentError = ref(null)
 const showModal = ref(false)
+const showPostConfirm = ref(false)
+const showCommentConfirm = ref(false)
+const showSignoutConfirm = ref(false)
 
 async function getPosts() {
     try {
@@ -154,6 +157,9 @@ export {
     postError,
     commentError,
     showModal,
+    showPostConfirm,
+    showCommentConfirm,
+    showSignoutConfirm,
     getPosts,
     getSinglePost,
     createPost,
