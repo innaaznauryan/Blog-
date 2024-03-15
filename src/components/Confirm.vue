@@ -6,12 +6,12 @@
     <p class="p-2 font-medium">{{ text }}</p>
     <div class="flex gap-4 justify-center">
       <BaseButton
-          @click="emit('confirm')"
+          @click="handleConfirm"
           class="px-4 py-2">
         Yes
       </BaseButton>
       <BaseButton
-          @click="emit('cancel')"
+          @click="handleCancel"
           class="px-4 py-2">
         No
       </BaseButton>
@@ -24,10 +24,18 @@ import {ref, onMounted} from "vue"
 import BaseButton from "@/components/BaseButton.vue"
 
 defineProps({
-  text: {type: String, default: "Are you sure?"}
+  text: {mode: String, required: true}
 })
 const emit = defineEmits(["confirm", "cancel"])
 const scrollTop = ref(null)
+
+const handleConfirm = () => {
+  emit("confirm")
+}
+
+const handleCancel = () => {
+  emit("cancel")
+}
 
 onMounted(() => {
   scrollTop.value = window.scrollY

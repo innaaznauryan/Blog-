@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-20 px-4 md:px-10 lg:px-40 xl:px-60 2xl:px-80 sm:flex-row">
         <div class="flex flex-col gap-4 w-full sm:w-1/2 items-center">
             <div class="flex items-center gap-2">
-            <h2 class="font-medium text-xl">{{ singlePost?.title }}</h2>
+            <h2 class="font-medium text-xl p-4">{{ singlePost?.title }}</h2>
             <div v-if="loggedIn" @click="handleLike" class="cursor-pointer">
                 <IconHeartFilled v-if="like"/>
                 <IconHeart v-else/>

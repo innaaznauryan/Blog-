@@ -1,9 +1,17 @@
 <template>
-  <Nav/>
-  <div :style="{ minHeight: 'calc(100vh - 140px)'}">
+  <transition name="fade">
+    <Suspense>
+      <template #fallback></template>
+      <Nav/>
+    </Suspense>
+  </transition>
+  <main :style="{ minHeight: 'calc(100vh - 144px)'}">
     <router-view/>
-  </div>
+  </main>
   <Footer/>
+  <teleport to="#modal">
+    <DialogsWrapper/>
+  </teleport>
 </template>
 
 <script setup>

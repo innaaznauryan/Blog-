@@ -25,15 +25,3 @@ import {loggedIn} from "@/composable/useUsers"
 import CreatePost from "@/components/CreatePost.vue"
 import Posts from "@/components/Posts.vue"
 </script>
-
-<style scopped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: .25s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

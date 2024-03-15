@@ -11,3 +11,13 @@ body {
     background-color: #f2f7f2;
     font-family: nunito;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: .25s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}

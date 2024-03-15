@@ -16,15 +16,3 @@
 import {postError} from "@/composable/usePosts"
 import Favorite from "@/components/Favorite.vue"
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: .25s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

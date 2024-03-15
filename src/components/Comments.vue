@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-6 items-center">
-    <h3 class="font-medium text-center text-lg">Comments</h3>
+    <h3 class="font-medium text-center text-lg pt-2">Comments</h3>
     <img :src=background alt="background" class="w-full">
     <div v-if="loggedIn" class="w-full">
       <form @submit.prevent="handleAddComment" class="flex flex-col gap-4 items-center">

@@ -32,19 +32,7 @@ import {loggedIn} from "@/composable/useUsers"
 import CreatePost from "@/components/CreatePost.vue"
 import SinglePost from "@/components/SinglePost.vue"
 
-const props = defineProps({
+defineProps({
   id: String
 })
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: .25s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
