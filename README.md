@@ -1,6 +1,6 @@
 # Vue Blog 
 
-### Welcome to Vue 3-powered Blog Site that features the following essential functionalities:
+### Welcome to Vue 3-powered Blogging Platform that features the following functionalities:
 - User-friendly login and signup
 - Effortlessly creating, editing, and deleting blog posts
 - Liking posts and saving them in favorites
@@ -12,8 +12,9 @@
 - Vue Router
 - Vuelidate
 - Firebase
+- Tailwind CSS
 
-Check out a live demo [here](https://blogging-platform-de857.web.app/)!
+Check out a live demo here: [Blogging Platform](https://blogging-platform-de857.web.app/)!
 
 ### Project setup
 
