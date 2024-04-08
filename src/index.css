@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: nunito;
-    src: url("@/assets/fonts/Nunito-VariableFont_wght.ttf");
-}
+/*@font-face {*/
+/*    font-family: nunito;*/
+/*    src: url("@/assets/fonts/Nunito-VariableFont_wght.ttf");*/
+/*}*/
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Lugrasimo&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Ojuju:wght@200..800&display=swap');
 
 body {
     background-color: #f2f7f2;
-    font-family: nunito;
+    /*font-family: nunito;*/
+    font-family: "Nunito Sans", sans-serif;
 }
 
 .fade-enter-active,
