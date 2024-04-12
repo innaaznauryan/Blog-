@@ -14,32 +14,44 @@ const showCommentConfirm = ref(false)
 const showSignoutConfirm = ref(false)
 
 async function getPosts() {
-    try {
-        const response = await firestore.GET_POSTS()
-        const data = []
-        response.docs.forEach(doc => {
-            data.push({...doc.data(), id: doc.id})
-        })
-        posts.value = data
-    } catch (err) {
-        console.log(err)
-        postError.value = "Something went wrong"
+    if (localStorage.posts) {
+        posts.value = JSON.parse(localStorage.posts)
+    } else {
+        try {
+            const response = await firestore.GET_POSTS()
+            const data = []
+            response.docs.forEach(doc => {
+                data.push({...doc.data(), id: doc.id})
+            })
+            posts.value = data
+            localStorage.setItem("posts", JSON.stringify(posts.value))
+            localStorage.setItem("blogTimeStap", Date.now())
+        } catch (err) {
+            console.log(err)
+            postError.value = "Something went wrong"
+        } 
     }
 }
 
 async function getSinglePost(id) {
-    try {
-        const response = await firestore.GET_SINGLE_POST(id)
-        if (!response.exists()) {
-            throw response
-        }
-        singlePost.value = {id: response.id, ...response.data()}
-    } catch (err) {
-        if (!err.exists()) {
-            router.push({name: "404"})
-        } else {
-            console.log(err)
-            postError.value = "Something went wrong"
+    if (localStorage[`post${id}`]) {
+        singlePost.value = JSON.parse(localStorage[`post${id}`])
+    } else {
+        try {
+            const response = await firestore.GET_SINGLE_POST(id)
+            if (!response.exists()) {
+                throw response
+            }
+            singlePost.value = {id: response.id, ...response.data()}
+            localStorage.setItem(`post${id}`, JSON.stringify(singlePost.value))
+            localStorage.setItem("blogTimeStap", Date.now())
+        } catch (err) {
+            if (!err.exists()) {
+                router.push({name: "404"})
+            } else {
+                console.log(err)
+                postError.value = "Something went wrong"
+            }
         }
     }
 }
@@ -63,6 +75,8 @@ async function createPost(title, content) {
         }
         const response = await firestore.CREATE_POST(newPost)
         posts.value.push({id: response.id, ...newPost})
+        localStorage.setItem("posts", JSON.stringify(posts.value))
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -71,9 +85,16 @@ async function createPost(title, content) {
 
 async function editPost(post, title, content) {
     try {
-        post.title = format(title.value)
-        post.content = format(content.value)
-        await firestore.UPDATE_POST(post)
+        const updatedPost = {
+            ...post, 
+            title: format(title.value),
+            content: format(content.value)
+        }
+        await firestore.UPDATE_POST(updatedPost)
+        singlePost.value = updatedPost
+        localStorage.setItem(`post${post.id}`, JSON.stringify(updatedPost))
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -83,6 +104,9 @@ async function editPost(post, title, content) {
 async function deletePost(id) {
     try {
         await firestore.DELETE_POST(id)
+        localStorage.removeItem(`post${id}`)
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -91,21 +115,29 @@ async function deletePost(id) {
 
 async function addComment(post, comment, loggedIn) {
     try {
-        post.value.comments.unshift({
-            id: uuidv4(),
-            userId: loggedIn.value.uid,
-            user: loggedIn.value.displayName,
-            email: loggedIn.value.email,
-            date: new Date().toLocaleString("en-US", {
-                hour: "numeric",
-                minute: "numeric",
-                day: "numeric",
-                month: "short",
-                year: "numeric"
-            }),
-            content: comment.value.trim()
-        })
-        await firestore.UPDATE_POST(post.value)
+        const comments = [
+            {
+                id: uuidv4(),
+                userId: loggedIn.value.uid,
+                user: loggedIn.value.displayName,
+                email: loggedIn.value.email,
+                date: new Date().toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                }),
+                content: comment.value.trim()
+            },
+            ...post.value.comments
+        ]
+        const updatedPost = {...post.value, comments}
+        await firestore.UPDATE_POST(updatedPost)
+        singlePost.value = updatedPost
+        localStorage.setItem(`post${post.value.id}`, JSON.stringify(updatedPost))
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -115,8 +147,12 @@ async function addComment(post, comment, loggedIn) {
 async function deleteComment(commentId, post) {
     try {
         const comments = post.value.comments.filter(comment => comment.id !== commentId)
-        post.value = {...post.value, comments}
-        await firestore.UPDATE_POST(post.value)
+        const updatedPost = {...post.value, comments}
+        await firestore.UPDATE_POST(updatedPost)
+        singlePost.value = updatedPost
+        localStorage.setItem(`post${post.value.id}`, JSON.stringify(updatedPost))
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -125,8 +161,13 @@ async function deleteComment(commentId, post) {
 
 async function addLike(post, uid) {
     try {
-        post.value.likes.push(uid)
-        await firestore.UPDATE_POST(post.value)
+        const likes = new Set([...post.value.likes, uid])
+        const updatedPost = {...post.value, likes: [...likes]}
+        await firestore.UPDATE_POST(updatedPost)
+        singlePost.value = updatedPost
+        localStorage.setItem(`post${post.value.id}`, JSON.stringify(updatedPost))
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"
@@ -135,8 +176,13 @@ async function addLike(post, uid) {
 
 async function deleteLike(post, uid) {
     try {
-        post.value = {...post.value, likes: post.value.likes.filter(id => id !== uid)}
-        await firestore.UPDATE_POST(post.value)
+        const likes = post.value.likes.filter(id => id !== uid)
+        const updatedPost = {...post.value, likes}
+        await firestore.UPDATE_POST(updatedPost)
+        singlePost.value = updatedPost
+        localStorage.setItem(`post${post.value.id}`, JSON.stringify(updatedPost))
+        localStorage.removeItem("posts")
+        localStorage.setItem("blogTimeStap", Date.now())
     } catch (err) {
         console.log(err)
         postError.value = "Something went wrong"

@@ -10,6 +10,9 @@ async function signUp(email, password, fullName) {
     try {
         const cred = await firestore.SIGNUP(email.value, password.value, fullName.value)
         await firestore.UPDATE_PROFILE(cred.user, {displayName: fullName.value})
+        loggedIn.value = cred.user
+        localStorage.setItem("user", JSON.stringify(loggedIn.value))
+        localStorage.setItem("userTimeStap", Date.now())
         router.push({name: "home"})
     } catch (err) {
         if (err.message.includes("already-in-use")) {
@@ -23,7 +26,10 @@ async function signUp(email, password, fullName) {
 
 async function login(email, password) {
     try {
-        await firestore.LOGIN(email.value, password.value)
+        const cred = await firestore.LOGIN(email.value, password.value)
+        loggedIn.value = cred.user
+        localStorage.setItem("user", JSON.stringify(loggedIn.value))
+        localStorage.setItem("userTimeStap", Date.now())
         router.push({name: "home"})
     } catch (err) {
         if (err.message.includes("invalid")) {
@@ -39,6 +45,8 @@ async function login(email, password) {
 async function logout() {
     try {
         await firestore.LOGOUT()
+        loggedIn.value = null
+        localStorage.setItem("user", JSON.stringify(loggedIn.value))
         router.push({name: "home"})
     } catch (err) {
         console.log(err)

@@ -38,12 +38,11 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue"
+import {computed, ref} from "vue"
 import {required} from "@vuelidate/validators"
 import useValidate from "@vuelidate/core"
 import {
   singlePost,
-  getSinglePost,
   addComment,
   deleteComment,
   commentError
@@ -55,9 +54,6 @@ import background from "@/assets/images/cover.jpg"
 import BaseInput from "@/components/BaseInput.vue"
 import BaseButton from "@/components/BaseButton.vue"
 
-const props = defineProps({
-  id: String
-})
 const comment = ref(null)
 
 const rules = computed(() => {
@@ -88,8 +84,4 @@ const handleDeleteComment = (commentId) => {
       {text: "Are you sure you want to delete this comment?"}
   )
 }
-onMounted(async () => {
-  await getSinglePost(props.id)
-  commentError.value = false
-})
 </script>

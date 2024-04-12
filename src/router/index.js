@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from "vue-router"
-import {onAuthStateChanged, auth} from "@/services/firestore.js"
 import Home from "@/views/HomeView.vue"
+import {auth, onAuthStateChanged} from "@/services/firestore"
 
 const routes = [
     {

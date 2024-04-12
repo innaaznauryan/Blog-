@@ -1,1 +1,67 @@
-const _0x1c7d9b=_0x1b19;(function(_0x4197e2,_0x358ba8){const _0x1ea8d1=_0x1b19,_0x115248=_0x4197e2();while(!![]){try{const _0x3365cf=parseInt(_0x1ea8d1(0x148))/0x1*(parseInt(_0x1ea8d1(0x150))/0x2)+parseInt(_0x1ea8d1(0x145))/0x3*(parseInt(_0x1ea8d1(0x14d))/0x4)+-parseInt(_0x1ea8d1(0x14a))/0x5+-parseInt(_0x1ea8d1(0x14e))/0x6*(parseInt(_0x1ea8d1(0x14c))/0x7)+parseInt(_0x1ea8d1(0x146))/0x8+-parseInt(_0x1ea8d1(0x144))/0x9*(-parseInt(_0x1ea8d1(0x152))/0xa)+parseInt(_0x1ea8d1(0x147))/0xb*(-parseInt(_0x1ea8d1(0x149))/0xc);if(_0x3365cf===_0x358ba8)break;else _0x115248['push'](_0x115248['shift']());}catch(_0x30046a){_0x115248['push'](_0x115248['shift']());}}}(_0x2d16,0x3db22));import{initializeApp}from'firebase/app';function _0x2d16(){const _0x3a4b4d=['429FmRcib','341xmHkCh','2844XmCgNx','1962350XsbFUr','blogging-platform-de857','5579tNRIMw','400GZHTME','1254zkzwsT','blogging-platform-de857.firebaseapp.com','638cXDuNn','posts','64890yEcbwf','blogging-platform-de857.appspot.com','279saZdom','11256qhYyXx','1086832alhWfT'];_0x2d16=function(){return _0x3a4b4d;};return _0x2d16();}import{getFirestore,collection,getDocs,doc,getDoc,addDoc,updateDoc,deleteDoc}from'firebase/firestore';import{getAuth,createUserWithEmailAndPassword,signOut,signInWithEmailAndPassword,onAuthStateChanged,updateProfile}from'firebase/auth';function _0x1b19(_0x5d2471,_0x2651ac){const _0x2d16b7=_0x2d16();return _0x1b19=function(_0x1b19db,_0x49cf66){_0x1b19db=_0x1b19db-0x144;let _0x2fab60=_0x2d16b7[_0x1b19db];return _0x2fab60;},_0x1b19(_0x5d2471,_0x2651ac);}const firebaseConfig={'apiKey':'AIzaSyDF6YAHq5KBmDLTITQxL_o0ZJRInO3G3us','authDomain':_0x1c7d9b(0x14f),'projectId':_0x1c7d9b(0x14b),'storageBucket':_0x1c7d9b(0x153),'messagingSenderId':'180759922893','appId':'1:180759922893:web:2cb019abc4430868168184'},app=initializeApp(firebaseConfig),db=getFirestore(app),auth=getAuth(),postsCollection=collection(db,_0x1c7d9b(0x151));export{auth,onAuthStateChanged};export default{'GET_POSTS'(){return getDocs(postsCollection);},'GET_SINGLE_POST'(_0x2b4b7d){const _0x532934=_0x1c7d9b,_0x4a0d4a=doc(db,_0x532934(0x151),_0x2b4b7d);return getDoc(_0x4a0d4a);},'SIGNUP'(_0x4ac114,_0x87acbb){return createUserWithEmailAndPassword(auth,_0x4ac114,_0x87acbb);},'UPDATE_PROFILE'(_0x432e4c,_0x5e7211){return updateProfile(_0x432e4c,_0x5e7211);},'LOGIN'(_0xc5afe7,_0x43eea3){return signInWithEmailAndPassword(auth,_0xc5afe7,_0x43eea3);},'LOGOUT'(){return signOut(auth);},'CREATE_POST'(_0x152517){return addDoc(postsCollection,_0x152517);},'UPDATE_POST'(_0x43cc63){const _0x3ccdf3=_0x1c7d9b,_0xb0a4f8=doc(db,_0x3ccdf3(0x151),_0x43cc63['id']);return updateDoc(_0xb0a4f8,_0x43cc63);},'DELETE_POST'(_0x428468){const _0x5a768f=_0x1c7d9b,_0x4b87dd=doc(db,_0x5a768f(0x151),_0x428468);return deleteDoc(_0x4b87dd);}};
+import { initializeApp } from 'firebase/app'
+import { getFirestore, 
+    collection, 
+    getDocs, 
+    doc, 
+    getDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc
+} from "firebase/firestore"
+import {
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signOut, 
+    signInWithEmailAndPassword, 
+    onAuthStateChanged,
+    updateProfile
+} from "firebase/auth"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDF6YAHq5KBmDLTITQxL_o0ZJRInO3G3us",
+  authDomain: "blogging-platform-de857.firebaseapp.com",
+  projectId: "blogging-platform-de857",
+  storageBucket: "blogging-platform-de857.appspot.com",
+  messagingSenderId: "180759922893",
+  appId: "1:180759922893:web:2cb019abc4430868168184"
+}
+
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+const auth = getAuth()
+const postsCollection = collection(db, "posts")
+
+export { auth, onAuthStateChanged }
+
+export default {
+    GET_POSTS() {
+        return getDocs(postsCollection)
+    },
+    GET_SINGLE_POST(id){
+        const postRef = doc(db, "posts", id)
+        return getDoc(postRef)
+    },
+    SIGNUP(email, password) {
+        return createUserWithEmailAndPassword(auth, email, password)
+    },
+    UPDATE_PROFILE(user, options) {
+        return updateProfile(user, options)
+    },
+    LOGIN(email, password) {
+        return signInWithEmailAndPassword(auth, email, password)
+    },
+    LOGOUT() {
+        return signOut(auth)
+    },
+    CREATE_POST(post) {
+        return addDoc(postsCollection, post)
+    },
+    UPDATE_POST(post) {
+        const postRef = doc(db, "posts", post.id)
+        return updateDoc(postRef, post)
+    },
+    DELETE_POST(id) {
+        const postRef = doc(db, "posts", id)
+        return deleteDoc(postRef)
+    }
+}

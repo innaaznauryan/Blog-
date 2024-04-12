@@ -12,7 +12,7 @@
     <teleport to="#modal">
       <transition name="fade">
         <div v-if="loggedIn && showModal">
-          <CreatePost />
+          <CreatePost/>
         </div>
       </transition>
     </teleport>

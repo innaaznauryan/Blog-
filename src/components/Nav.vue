@@ -57,10 +57,17 @@ const handleClick = () => {
 }
 
 await new Promise(resolve => {
-  onAuthStateChanged(auth, (user) => {
-    loggedIn.value = user
+  if (localStorage.user) {
+    loggedIn.value = JSON.parse(localStorage.user)
     resolve()
-  })
+  } else {
+    onAuthStateChanged(auth, (user) => {
+      loggedIn.value = user
+      localStorage.setItem("user", JSON.stringify(loggedIn.value))
+      localStorage.setItem("userTimeStap", Date.now())
+      resolve()
+    })
+  }
 })
 </script>
 

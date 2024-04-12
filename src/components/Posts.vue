@@ -19,11 +19,11 @@
             Create Post
           </BaseButton>
         </div>
-        <div v-if="search" class="flex flex-wrap mx-2 md:mx-10 lg:mx-40 xl:mx-60 2xl:mx-80">
-          <PostCard v-for="post in filteredPosts" :post="post" :key="post.id"/>
-        </div>
-        <div v-else class="flex flex-wrap mx-2 md:mx-10 lg:mx-40 xl:mx-60 2xl:mx-80">
-          <PostCard v-for="post in posts" :post="post" :key="post.id"/>
+        <div class="flex flex-wrap mx-2 md:mx-10 lg:mx-40 xl:mx-60 2xl:mx-80">
+          <PostCard 
+          v-for="post in search ? filteredPosts : posts"
+          :key="post.id"
+          :post="post"/>
         </div>
       </div>
 </template>

@@ -3,7 +3,7 @@
         <div class="flex flex-col gap-4 w-full sm:w-1/2 items-center">
             <div class="flex items-center gap-2">
             <h2 class="font-medium text-xl p-4">{{ singlePost?.title }}</h2>
-            <div v-if="loggedIn" @click="handleLike" class="cursor-pointer">
+            <div v-if="loggedIn" @click="handleDebouncedLike" class="cursor-pointer">
                 <IconHeartFilled v-if="like"/>
                 <IconHeart v-else/>
             </div>
@@ -26,7 +26,7 @@
             <pre class="text-left whitespace-pre-wrap">{{ singlePost?.content }}</pre>
         </div>
         <div class="w-full sm:w-1/2">
-            <Comments :id="id"/>
+            <Comments/>
         </div>
     </div>
 </template>
@@ -41,7 +41,7 @@ import {
   deletePost,
   addLike,
   deleteLike,
-  isFav
+  isFav,
 } from "@/composable/usePosts"
 import {loggedIn} from "@/composable/useUsers"
 import {IconHeart, IconHeartFilled} from "@tabler/icons-vue"
@@ -54,13 +54,22 @@ const props = defineProps({
 })
 const like = ref(false)
 
-const handleLike = async () => {
-  like.value ? await deleteLike(singlePost, loggedIn.value.uid) : await addLike(singlePost, loggedIn.value.uid)
-  like.value = !like.value
+const handleLike =  () => {
+  let timeoutId = null
+  return function inner () {
+    like.value = !like.value
+    timeoutId && clearTimeout(timeoutId)
+    timeoutId = setTimeout(async() => {
+      like.value ? await addLike(singlePost, loggedIn.value.uid) : await deleteLike(singlePost, loggedIn.value.uid)
+    }, 3000)
+  }
 }
+const handleDebouncedLike = handleLike()
+
 const handleEditPost = () => {
   showModal.value = true
 }
+
 const handleDeletePost = () => {
   useConfirmBeforeAction(
       async () => {
@@ -71,16 +80,12 @@ const handleDeletePost = () => {
   )
 }
 
+await getSinglePost(props.id)
+
 onMounted(() => {
   showModal.value = false
   if (loggedIn.value) {
     like.value = isFav(singlePost, loggedIn.value.uid)
   }
 })
-
-await getSinglePost(props.id)
 </script>
-
-<style scoped>
-
-</style>
